@@ -1,6 +1,12 @@
+import tkinter as tk
+from tkinter import ttk, messagebox
+from datetime import datetime
 import requests
 import socket
-from datetime import datetime
+from tkinter import ttk
+
+
+# --- Funciones de negocio (igual que antes, resumidas) ---
 
 def obtener_nombre_equipo_por_defecto():
     try:
@@ -13,112 +19,123 @@ def obtener_nombre_bucket_ventana():
         response = requests.get("http://localhost:5600/api/0/buckets")
         response.raise_for_status()
         buckets_data = response.json()
-        for bucket_id, bucket_info in buckets_data.items():
+        for bucket_id in buckets_data:
             if bucket_id.startswith("aw-watcher-window_"):
                 return bucket_id
         return None
-    except requests.exceptions.RequestException as e:
-        print(f"Error al conectar con ActivityWatch API: {e}")
+    except Exception as e:
+        messagebox.showerror("Error", f"No se pudo conectar con ActivityWatch: {e}")
         return None
 
 def construir_url_eventos(nombre_bucket, fecha_inicio, fecha_fin):
-    start_iso = fecha_inicio.isoformat() + "Z"
-    end_iso = fecha_fin.isoformat() + "Z"
-    return f"http://localhost:5600/api/0/buckets/{nombre_bucket}/events?start={start_iso}&end={end_iso}"
+    return f"http://localhost:5600/api/0/buckets/{nombre_bucket}/events?start={fecha_inicio.isoformat()}Z&end={fecha_fin.isoformat()}Z"
 
 def obtener_eventos(url):
     try:
         response = requests.get(url)
         response.raise_for_status()
         return response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"Error al obtener eventos: {e}")
-        return None
+    except Exception as e:
+        messagebox.showerror("Error", f"No se pudo obtener eventos: {e}")
+        return []
 
-# ✅ Clasificador por categoría
 def clasificar_evento(evento):
     app = evento['data'].get('app', '').lower()
     title = evento['data'].get('title', '').lower()
 
-    productivas = ['code.exe', 'devenv.exe', 'notepad++.exe', 'excel.exe', 'word.exe', 'chrome.exe']
-    comunicacion = ['whatsapp', 'teams', 'zoom', 'gmail', 'outlook']
-    no_productivas = ['netflix', 'spotify', 'youtube']
+    # Comunicación
+    if any(x in app or x in title for x in ['whatsapp', 'teams', 'gmail']): return "Comunicación"
 
-    if any(p in app or p in title for p in comunicacion):
-        return "Comunicación"
-    if any(p in app or p in title for p in no_productivas):
-        return "No productiva"
-    if any(p in app for p in productivas) or 'chatgpt' in title or 'docs.google' in title:
+  # No productiva
+    if any(x in app or x in title for x in ['netflix', 'spotify', 'youtube']): return "No productiva"
+
+    
+    # Productiva
+    productivas_apps = ['code.exe', 'devenv.exe', 'word.exe', 'python.exe', 'notepad.exe', 'chrome.exe']
+    productivas_titles = ['docs.google', 'gemini', 'google gemini', 'chatgpt', 'colab', 'stackoverflow']
+    if any(x in app for x in productivas_apps) or any(x in title for x in productivas_titles):
         return "Productiva"
-    return "No clasificada"
 
-def mostrar_reporte_diario(eventos):
-    if not eventos:
-        print("No se encontraron eventos para el rango de fechas especificado.")
+# --- Interfaz Tkinter ---
+
+def generar_reporte():
+    try:
+        fi = datetime.strptime(entry_inicio.get(), "%Y-%m-%d %H:%M")
+        ff = datetime.strptime(entry_fin.get(), "%Y-%m-%d %H:%M")
+        if fi > ff:
+            messagebox.showwarning("Fechas inválidas", "La fecha de inicio debe ser menor que la de fin.")
+            return
+    except:
+        messagebox.showwarning("Formato incorrecto", "Usa el formato YYYY-MM-DD HH:MM")
         return
 
-    eventos_por_dia = {}
+    bucket = obtener_nombre_bucket_ventana()
+    if not bucket:
+        return
+
+    eventos = obtener_eventos(construir_url_eventos(bucket, fi, ff))
+    categoria_filtro = combo_categoria.get()
+    duracion_filtro = combo_duracion.get()
+
+    for row in tree.get_children():
+        tree.delete(row)
+
+
     for evento in eventos:
-        try:
-            timestamp_str = evento['timestamp']
-            timestamp = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00'))
-            fecha = timestamp.strftime("%Y-%m-%d")
-            if fecha not in eventos_por_dia:
-                eventos_por_dia[fecha] = []
-            eventos_por_dia[fecha].append(evento)
-        except ValueError as e:
-            print(f"Error al procesar timestamp: {timestamp_str}. Error: {e}")
+        duracion = evento.get('duration', 0)
+        if duracion is None: continue
+
+        minutos = duracion / 60
+        if duracion_filtro == "2+ min" and minutos < 2:
+            continue
+        if duracion_filtro == "5+ min" and minutos < 5:
+            continue
+        if duracion_filtro == "10+ min" and minutos < 10:
             continue
 
-    for fecha, eventos_del_dia in eventos_por_dia.items():
-        print(f"\n--- Reporte del día: {fecha} ---")
-        for evento in eventos_del_dia:
-            duracion = evento.get('duration', 0)
-            if duracion is None or duracion < 120:
-                continue  # Solo eventos >= 2 minutos
 
-            timestamp_str = evento.get('timestamp', 'Timestamp no encontrado')
-            try:
-                hora = datetime.fromisoformat(timestamp_str.replace('Z', '+00:00')).strftime('%H:%M:%S')
-            except ValueError:
-                hora = "Hora no válida"
+        categoria = clasificar_evento(evento)
+        if categoria_filtro != "Todas" and categoria != categoria_filtro:
+            continue
 
-            app = evento['data'].get('app', 'App desconocida')
-            title = evento['data'].get('title', 'Sin título')
-            categoria = clasificar_evento(evento)
+        hora = datetime.fromisoformat(evento["timestamp"].replace("Z", "+00:00")).strftime("%H:%M:%S")
+        app = evento['data'].get("app", "")
+        title = evento['data'].get("title", "")
+        tree.insert("", "end", values=(hora, app, title, f"{duracion:.2f}", categoria))
+# Ventana principal
+ventana = tk.Tk()
+ventana.title("Filtro de Actividades - ActivityWatch")
 
-            print(f"  - Hora: {hora}, Duración: {duracion:.2f} segundos")
-            print(f"    App: {app}")
-            print(f"    Título: {title}")
-            print(f"    Categoría: {categoria}")
+tk.Label(ventana, text="Fecha inicio (YYYY-MM-DD HH:MM):").grid(row=0, column=0, sticky="w")
+entry_inicio = tk.Entry(ventana, width=20)
+entry_inicio.grid(row=0, column=1)
 
-if __name__ == "__main__":
-    nombre_bucket_final = obtener_nombre_bucket_ventana()
+tk.Label(ventana, text="Fecha fin (YYYY-MM-DD HH:MM):").grid(row=1, column=0, sticky="w")
+entry_fin = tk.Entry(ventana, width=20)
+entry_fin.grid(row=1, column=1)
 
-    if not nombre_bucket_final:
-        print("No se pudo encontrar automáticamente el nombre del bucket del watcher de ventana.")
-        nombre_equipo_defecto = obtener_nombre_equipo_por_defecto()
-        print(f"Considera usar un nombre de bucket como 'aw-watcher-window_{nombre_equipo_defecto}'.")
-        exit()
+tk.Label(ventana, text="Filtrar duración:").grid(row=2, column=0, sticky="w")
+combo_duracion = ttk.Combobox(ventana, values=["2+ min", "5+ min", "10+ min"], state="readonly")
+combo_duracion.grid(row=2, column=1)
+combo_duracion.current(0)
 
-    try:
-        fecha_inicio_str = input("Introduce la fecha y hora de inicio (YYYY-MM-DD HH:MM): ")
-        fecha_fin_str = input("Introduce la fecha y hora de fin (YYYY-MM-DD HH:MM): ")
-        fecha_inicio_reporte = datetime.strptime(fecha_inicio_str, "%Y-%m-%d %H:%M")
-        fecha_fin_reporte = datetime.strptime(fecha_fin_str, "%Y-%m-%d %H:%M")
+tk.Label(ventana, text="Filtrar categoría:").grid(row=3, column=0, sticky="w")
+combo_categoria = ttk.Combobox(ventana, values=["Todas", "Productiva", "No productiva", "Comunicación"], state="readonly")
+combo_categoria.grid(row=3, column=1)
+combo_categoria.current(0)
 
-        if fecha_inicio_reporte > fecha_fin_reporte:
-            print("Error: La fecha de inicio debe ser anterior a la fecha de fin.")
-            exit()
+tk.Button(ventana, text="Generar Reporte", command=generar_reporte).grid(row=4, columnspan=2, pady=10)
 
-    except ValueError:
-        print("Error: Formato de fecha y hora incorrecto. Usa YYYY-MM-DD HH:MM.")
-        exit()
-
-    url_reporte = construir_url_eventos(nombre_bucket_final, fecha_inicio_reporte, fecha_fin_reporte)
-    eventos_reporte = obtener_eventos(url_reporte)
-
-    if eventos_reporte:
-        mostrar_reporte_diario(eventos_reporte)
-    else:
-        print("No se pudieron obtener los eventos del bucket.")
+tree = ttk.Treeview(ventana, columns=("Hora", "App", "Título", "Duración", "Categoría"), show="headings")
+tree.heading("Hora", text="Hora")
+tree.heading("App", text="App")
+tree.heading("Título", text="Título")
+tree.heading("Duración", text="Duración (seg)")
+tree.heading("Categoría", text="Categoría")
+tree.column("Hora", width=80)
+tree.column("App", width=120)
+tree.column("Título", width=250)
+tree.column("Duración", width=100)
+tree.column("Categoría", width=100)
+tree.grid(row=5, columnspan=2)
+ventana.mainloop() 
