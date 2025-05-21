@@ -1,19 +1,47 @@
+import os
+import json
+import re
+import socket
+import requests
 import tkinter as tk
 from tkinter import ttk, messagebox
 from datetime import datetime
-import requests
-import socket
 from tkinter import ttk
 
+# Obtener ruta dinamica del archivo settings.json según el usuario del sistema
+SETTINGS_PATH = os.path.join(
+    os.path.expanduser("~"),
+    "AppData", "Local", "activitywatch", "activitywatch", "aw-server", "settings.json"
+)
 
-# --- Funciones de negocio (igual que antes, resumidas) ---
+# Cargar reglas de categorización desde settings.json exportado de ActivityWatch
+def cargar_reglas_desde_json(ruta_json):
+    if not os.path.exists(ruta_json):
+        print(f"❌ No se encontró settings.json en: {ruta_json}")
+        return []
+    with open(ruta_json, 'r', encoding='utf-8') as f:
+        configuracion = json.load(f)
+    return configuracion.get("classes", [])
 
+# Compilar expresiones regulares desde el JSON
+def compilar_reglas(rules_json):
+    reglas_compiladas = []
+    for regla in rules_json:
+        nombre_categoria = regla.get("name", ["Sin nombre"])[0]
+        regex = regla.get("rule", {}).get("regex")
+        if regex:
+            pattern = re.compile(regex, re.IGNORECASE)
+            reglas_compiladas.append((nombre_categoria, pattern))
+    return reglas_compiladas
+
+# Determinar el nombre del equipo
 def obtener_nombre_equipo_por_defecto():
     try:
         return socket.gethostname()
     except socket.error:
         return "equipo_desconocido"
 
+# Detectar bucket de ventana activo
 def obtener_nombre_bucket_ventana():
     try:
         response = requests.get("http://localhost:5600/api/0/buckets")
@@ -27,9 +55,11 @@ def obtener_nombre_bucket_ventana():
         messagebox.showerror("Error", f"No se pudo conectar con ActivityWatch: {e}")
         return None
 
+# Construir la URL de consulta de eventos
 def construir_url_eventos(nombre_bucket, fecha_inicio, fecha_fin):
     return f"http://localhost:5600/api/0/buckets/{nombre_bucket}/events?start={fecha_inicio.isoformat()}Z&end={fecha_fin.isoformat()}Z"
 
+# Consultar eventos de ActivityWatch
 def obtener_eventos(url):
     try:
         response = requests.get(url)
@@ -39,25 +69,17 @@ def obtener_eventos(url):
         messagebox.showerror("Error", f"No se pudo obtener eventos: {e}")
         return []
 
-def clasificar_evento(evento):
+# Clasificar eventos en base a las reglas cargadas desde settings.json
+def clasificar_evento_por_reglas(evento, reglas_compiladas):
     app = evento['data'].get('app', '').lower()
     title = evento['data'].get('title', '').lower()
+    texto = f"{app} {title}"
+    for categoria, pattern in reglas_compiladas:
+        if pattern.search(texto):
+            return categoria
+    return "Sin clasificar"
 
-    # Comunicación
-    if any(x in app or x in title for x in ['whatsapp', 'teams', 'gmail']): return "Comunicación"
-
-  # No productiva
-    if any(x in app or x in title for x in ['netflix', 'spotify', 'youtube']): return "No productiva"
-
-    
-    # Productiva
-    productivas_apps = ['code.exe', 'devenv.exe', 'word.exe', 'python.exe', 'notepad.exe', 'chrome.exe']
-    productivas_titles = ['docs.google', 'gemini', 'google gemini', 'chatgpt', 'colab', 'stackoverflow']
-    if any(x in app for x in productivas_apps) or any(x in title for x in productivas_titles):
-        return "Productiva"
-
-# --- Interfaz Tkinter ---
-
+# Generar y mostrar el reporte
 def generar_reporte():
     try:
         fi = datetime.strptime(entry_inicio.get(), "%Y-%m-%d %H:%M")
@@ -67,6 +89,11 @@ def generar_reporte():
             return
     except:
         messagebox.showwarning("Formato incorrecto", "Usa el formato YYYY-MM-DD HH:MM")
+        return
+
+    reglas = compilar_reglas(cargar_reglas_desde_json(SETTINGS_PATH))
+    if not reglas:
+        messagebox.showerror("Error", "No se encontraron reglas en settings.json")
         return
 
     bucket = obtener_nombre_bucket_ventana()
@@ -80,10 +107,10 @@ def generar_reporte():
     for row in tree.get_children():
         tree.delete(row)
 
-
     for evento in eventos:
         duracion = evento.get('duration', 0)
-        if duracion is None: continue
+        if duracion is None:
+            continue
 
         minutos = duracion / 60
         if duracion_filtro == "2+ min" and minutos < 2:
@@ -93,16 +120,26 @@ def generar_reporte():
         if duracion_filtro == "10+ min" and minutos < 10:
             continue
 
-
-        categoria = clasificar_evento(evento)
+        categoria = clasificar_evento_por_reglas(evento, reglas)
         if categoria_filtro != "Todas" and categoria != categoria_filtro:
             continue
+
+        
 
         hora = datetime.fromisoformat(evento["timestamp"].replace("Z", "+00:00")).strftime("%H:%M:%S")
         app = evento['data'].get("app", "")
         title = evento['data'].get("title", "")
         tree.insert("", "end", values=(hora, app, title, f"{duracion:.2f}", categoria))
-# Ventana principal
+
+        print(f"[DEBUG] App: {app} | Title: {title} → Categoría asignada: {categoria}")
+        print("DEBUG ---")
+        print("App:", evento['data'].get('app', ''))
+        print("Título:", evento['data'].get('title', ''))
+        print("Duración:", evento.get('duration', 0))
+        print("Categoría detectada:", clasificar_evento_por_reglas(evento, reglas))
+        print("-------------------")
+
+# Interfaz gráfica con Tkinter
 ventana = tk.Tk()
 ventana.title("Filtro de Actividades - ActivityWatch")
 
@@ -120,7 +157,7 @@ combo_duracion.grid(row=2, column=1)
 combo_duracion.current(0)
 
 tk.Label(ventana, text="Filtrar categoría:").grid(row=3, column=0, sticky="w")
-combo_categoria = ttk.Combobox(ventana, values=["Todas", "Productiva", "No productiva", "Comunicación"], state="readonly")
+combo_categoria = ttk.Combobox(ventana, values=["Todas", "Productiva", "No productiva", "Comunicación", "Sin clasificar"], state="readonly")
 combo_categoria.grid(row=3, column=1)
 combo_categoria.current(0)
 
@@ -138,4 +175,5 @@ tree.column("Título", width=250)
 tree.column("Duración", width=100)
 tree.column("Categoría", width=100)
 tree.grid(row=5, columnspan=2)
-ventana.mainloop() 
+
+ventana.mainloop()
