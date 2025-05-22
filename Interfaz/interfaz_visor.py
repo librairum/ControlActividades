@@ -1,155 +1,130 @@
+import os, sys, time, base64, socket, threading, sqlite3
+from datetime import datetime
 import tkinter as tk
-import psutil
-import os
-import mss
-import base64
-import time
-import sys
+from tkinter import messagebox
+import psutil, mss
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
-from captura import insertar_db
-from datetime import datetime
 from conf_avanz import mostrar_configuracion_avanzada
 
-def ejecutar_captura_programada():
-    hora_objetivo = "15:56"  # Cambia esta hora según lo necesites
-    esperar_hora_programada(hora_objetivo)
-    ruta_imagen, timestamp = obtener_ruta_guardado()
-    tomar_captura(ruta_imagen)
-    base64_string = convertir_a_base64(ruta_imagen)
-    guardar_en_txt_append(base64_string, timestamp)
+# === FUNCIONES AUXILIARES ===
 
 def esta_activitywatch_activo():
-    procesos_a_verificar = ['aw-server', 'aw-server.exe',
-                            'aw-watcher-window', 'aw-watcher-window.exe']
-    for p in psutil.process_iter(['name']):
-        if p.info['name'] in procesos_a_verificar:
-            return True
-    return False
+    return any(p.info['name'] in ['aw-server', 'aw-server.exe', 'aw-watcher-window', 'aw-watcher-window.exe']
+               for p in psutil.process_iter(['name']))
 
-def obtener_ruta_guardado():
-    # Subir un nivel desde Interfaz y entrar a /captura/Screen_Caps
+def obtener_paths():
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    carpeta = os.path.join(base_dir, "captura", "Screen_Caps")
-    os.makedirs(carpeta, exist_ok=True)
+    caps_dir = os.path.join(base_dir, "captura", "Screen_Caps")
+    bin_dir = os.path.join(base_dir, "captura", "Img_to_Binary")
+    db_path = os.path.join(base_dir, "captura", "imagenes.db")
+    os.makedirs(caps_dir, exist_ok=True)
+    os.makedirs(bin_dir, exist_ok=True)
+    return caps_dir, bin_dir, db_path
+
+def tomar_captura_y_guardar(caps_dir):
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    nombre_archivo = f"captura_{timestamp}.jpg"
-    return os.path.join(carpeta, nombre_archivo), timestamp
-
-def tomar_captura(ruta_archivo):
+    path = os.path.join(caps_dir, f"captura_{timestamp}.jpg")
     with mss.mss() as sct:
-        sct.shot(output=ruta_archivo)
-    print(f"[Captura] Imagen guardada en: {ruta_archivo}")
+        sct.shot(output=path)
+    print(f"[Captura] Imagen guardada: {path}")
+    return path, timestamp
 
-def convertir_a_base64(ruta_imagen):
-    with open(ruta_imagen, "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read()).decode("utf-8")
-    return encoded_string
+def convertir_a_base64(path):
+    with open(path, "rb") as f: return base64.b64encode(f.read()).decode("utf-8")
 
-def guardar_en_txt_append(base64_string, timestamp):
-    # Subir un nivel desde Interfaz y entrar a /captura/Img_to_Binary
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    carpeta_txt = os.path.join(base_dir, "captura", "Img_to_Binary")
-    os.makedirs(carpeta_txt, exist_ok=True)
-    ruta_txt = os.path.join(carpeta_txt, "capturas_base64.txt")
+def guardar_en_txt(bin_dir, contenido, timestamp):
+    with open(os.path.join(bin_dir, "capturas_base64.txt"), "a", encoding="utf-8") as f:
+        f.write(f"\n\n--- Imagen capturada en {timestamp} ---\nImagen en binario:\n\n{contenido}")
+    print(f"[TXT] Base64 guardado.")
 
-    with open(ruta_txt, "a", encoding="utf-8") as txt_file:
-        txt_file.write(f"\n\n--- Imagen capturada en {timestamp} ---\n")
-        txt_file.write("Imagen en binario:\n\n")
-        txt_file.write(base64_string)
-    print(f"[TXT] Base64 agregado a: {ruta_txt}")
-
-def esperar_hora_programada(hora_objetivo):
+def esperar_hora(hora_objetivo):
     print(f"[Captura] Esperando hasta las {hora_objetivo}...")
-    while True:
-        ahora = datetime.now().strftime("%H:%M")
-        if ahora == hora_objetivo:
-            print("[Captura] ¡Hora alcanzada!")
-            return
+    while datetime.now().strftime("%H:%M") != hora_objetivo:
         time.sleep(1)
+    print("[Captura] ¡Hora alcanzada!")
+
+# === INTERFAZ GRÁFICA ===
 
 def crear_interfaz():
     root = tk.Tk()
     root.title("VisorActividad")
     root.resizable(False, False)
 
-    # Dimensiones deseadas
-    ancho_ventana = 500
-    alto_ventana = 250
-
-    # Obtener dimensiones de la pantalla
-    ancho_pantalla = root.winfo_screenwidth()
-    alto_pantalla = root.winfo_screenheight()
-
-    # Calcular coordenadas para centrar la ventana
-    x = (ancho_pantalla // 2) - (ancho_ventana // 2)
-    y = (alto_pantalla // 2) - (alto_ventana // 2)
-
-    # Establecer la geometría de la ventana centrada
+    # Dimensiones y centrado
+    ancho_ventana, alto_ventana = 500, 250
+    x = (root.winfo_screenwidth() // 2) - (ancho_ventana // 2)
+    y = (root.winfo_screenheight() // 2) - (alto_ventana // 2)
     root.geometry(f"{ancho_ventana}x{alto_ventana}+{x}+{y}")
 
-    # Marco principal con borde
     frame = tk.Frame(root, bd=2, relief="solid", padx=10, pady=10)
     frame.pack(padx=20, pady=20, fill='both', expand=True)
 
-    # Fila de título con fondo celeste
     fila_titulo = tk.Frame(frame, bg="lightblue")
     fila_titulo.grid(row=0, column=0, columnspan=3, sticky="ew", pady=(0, 10))
 
     titulo = tk.Label(fila_titulo, text="VisorActividad", font=("Arial", 14, "bold"), bg="lightblue")
     titulo.pack(fill="both", expand=True)
 
-    # Configurar columnas para que se expandan proporcionalmente
-    for col in range(3):
-        frame.columnconfigure(col, weight=1)
+    for col in range(3): frame.columnconfigure(col, weight=1)
 
-    # Etiqueta para mostrar mensajes
-    mensaje = tk.Label(frame, text="", fg="red")
-    mensaje.grid(row=4, column=0, columnspan=3)
-
-    # Función para validar DNI
-    def validar_dni():
-        dni_capturado = []
-        dni = entry.get().strip()
-        if dni:
-            if esta_activitywatch_activo():
-                ejecutar_captura_programada()
-                insertar_db.insertar_desde_txt(dni)
-            else:
-                print("[Captura] ActivityWatch no está en ejecución. Terminando script.")
-
-        if not dni:
-            mensaje.config(text="Por favor ingrese su DNI...", fg="red")
-        else:
-            mensaje.config(text="DNI ingresado", fg="green")
-            dni_capturado.append(dni)
-        return dni_capturado[0] if dni_capturado else None
-            # Aquí podrías continuar con el flujo principal del programa...
-
-    # Botones distribuidos que se expanden
-    btn_iniciar = tk.Button(frame, text="Iniciar Programa", command=validar_dni)
-    btn_iniciar.grid(row=1, column=0, padx=5, pady=5, sticky="ew")
-
-    btn_detener = tk.Button(frame, text="Detener Programa")
-    btn_detener.grid(row=1, column=1, padx=5, pady=5, sticky="ew")
-
-    btn_horario = tk.Button(frame, text="Programa horario")
-    btn_horario.grid(row=2, column=0, padx=5, pady=5, sticky="ew")
-
-    tk.Button(frame, text="Configuracion Avanzada", command=mostrar_configuracion_avanzada)\
-        .grid(row=2, column=1, padx=5, pady=5, sticky="ew")
-
-    # Sección de DNI en tres columnas
+    # Entrada DNI
     tk.Label(frame, text="Coloque su DNI:").grid(row=3, column=0, padx=5, pady=10, sticky="e")
     entry = tk.Entry(frame)
     entry.grid(row=3, column=1, padx=5, pady=10, sticky="ew")
 
+    mensaje = tk.Label(frame, text="", fg="red")
+    mensaje.grid(row=4, column=0, columnspan=3)
+
+    # Función principal
+    def iniciar_programa():
+        dni = entry.get().strip()
+        if not dni:
+            messagebox.showwarning("Campo vacío", "Por favor, ingrese su número de DNI.")
+            return
+
+        horas = ["16:39", "16:40"]
+        caps_dir, bin_dir, db_path = obtener_paths()
+
+        def tarea():
+            capturas = []
+            for hora in horas:
+                esperar_hora(hora)
+                path, timestamp = tomar_captura_y_guardar(caps_dir)
+                b64 = convertir_a_base64(path)
+                guardar_en_txt(bin_dir, b64, timestamp)
+
+                fecha_raw, hora_raw = timestamp.split("_")
+                fecha = datetime.strptime(fecha_raw, "%Y%m%d").strftime("%d/%m/%y")
+                hora_actual = datetime.strptime(hora_raw, "%H%M%S").strftime("%H:%M:%S")
+                nombre_pc = socket.gethostname()
+                imagen_bytes = base64.b64decode(b64)
+                capturas.append((dni, nombre_pc, fecha, hora_actual, imagen_bytes))
+
+            with sqlite3.connect(db_path) as conn:
+                conn.executemany(
+                    "INSERT INTO fotos (dni, nombre_equipo, fecha, hora, imagen_en_bytes) VALUES (?, ?, ?, ?, ?)",
+                    capturas)
+            messagebox.showinfo("capturas guardados correctamente.")
+
+        threading.Thread(target=tarea).start()
+
+    # Botones
+    tk.Button(frame, text="Iniciar Programa", command=iniciar_programa)\
+        .grid(row=1, column=0, padx=5, pady=5, sticky="ew")
+    tk.Button(frame, text="Detener Programa")\
+        .grid(row=1, column=1, padx=5, pady=5, sticky="ew")
+    tk.Button(frame, text="Programa horario")\
+        .grid(row=2, column=0, padx=5, pady=5, sticky="ew")
+    tk.Button(frame, text="Configuracion Avanzada", command=mostrar_configuracion_avanzada)\
+        .grid(row=2, column=1, padx=5, pady=5, sticky="ew")
+
     root.mainloop()
 
+# === EJECUCIÓN PRINCIPAL ===
+
 if __name__ == "__main__":
-    crear_interfaz()
-    if esta_activitywatch_activo():
-        ejecutar_captura_programada()
+    if not esta_activitywatch_activo():
+        messagebox.showerror("Error", "ActivityWatch no está en ejecución.\nPor favor, inicie primero ActivityWatch.")
     else:
-        print("[Captura] ActivityWatch no está en ejecución. Terminando script.")
+        crear_interfaz()

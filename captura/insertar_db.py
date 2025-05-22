@@ -4,6 +4,20 @@ import socket
 import base64
 from datetime import datetime
 
+def insertar_fotos_actuales(lista_capturas):
+    ruta_db = os.path.abspath(os.path.join(os.path.dirname(__file__), "imagenes.db"))
+    conn = sqlite3.connect(ruta_db)
+    cursor = conn.cursor()
+
+    for dni, nombre_equipo, fecha, hora, imagen_en_bytes in lista_capturas:
+        cursor.execute(
+            "INSERT INTO fotos (dni, nombre_equipo, fecha, hora, imagen_en_bytes) VALUES (?, ?, ?, ?, ?)",
+            (dni, nombre_equipo, fecha, hora, imagen_en_bytes)
+        )
+
+    conn.commit()
+    conn.close()
+
 def extraer_capturas_desde_txt():
     ruta_txt = os.path.join(os.path.dirname(__file__), "Img_to_Binary", "capturas_base64.txt")
     with open(ruta_txt, "r", encoding="utf-8") as f:
