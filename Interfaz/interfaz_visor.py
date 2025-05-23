@@ -9,6 +9,31 @@ from conf_avanz import mostrar_configuracion_avanzada
 
 # === FUNCIONES AUXILIARES ===
 
+def leer_horas_programadas():
+    """
+    Lee las horas programadas desde 'captura/hora_programada/hora_cap.txt'
+    y retorna una lista de horas en formato HH:MM.
+    """
+    horas = []
+    try:
+        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        ruta_txt = os.path.join(base_dir, "captura", "hora_programada", "hora_cap.txt")
+        with open(ruta_txt, "r", encoding="utf-8") as archivo:
+            for linea in archivo:
+                linea = linea.strip()
+                if not linea:
+                    continue
+                # Extraer la hora (lo que está después de ": ")
+                if ": " in linea:
+                    _, hora = linea.split(": ", 1)
+                    if len(hora) == 5 and hora[2] == ":":
+                        horas.append(hora)
+    except FileNotFoundError:
+        messagebox.showerror("Error", "No se encontró el archivo hora_cap.txt.")
+    except Exception as e:
+        messagebox.showerror("Error", f"Error al leer horas programadas: {e}")
+    return horas
+
 def esta_activitywatch_activo():
     return any(p.info['name'] in ['aw-server', 'aw-server.exe', 'aw-watcher-window', 'aw-watcher-window.exe']
                for p in psutil.process_iter(['name']))
@@ -36,7 +61,7 @@ def convertir_a_base64(path):
 def guardar_en_txt(bin_dir, contenido, timestamp):
     with open(os.path.join(bin_dir, "capturas_base64.txt"), "a", encoding="utf-8") as f:
         f.write(f"\n\n--- Imagen capturada en {timestamp} ---\nImagen en binario:\n\n{contenido}")
-    print(f"[TXT] Base64 guardado.")
+    print("[TXT] Base64 guardado.")
 
 def esperar_hora(hora_objetivo):
     print(f"[Captura] Esperando hasta las {hora_objetivo}...")
@@ -83,7 +108,7 @@ def crear_interfaz():
             messagebox.showwarning("Campo vacío", "Por favor, ingrese su número de DNI.")
             return
 
-        horas = ["16:39", "16:40"]
+        horas = leer_horas_programadas()
         caps_dir, bin_dir, db_path = obtener_paths()
 
         def tarea():
