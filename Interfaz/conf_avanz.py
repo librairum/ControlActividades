@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+import os
 
 # Estructura para almacenar la programación
 programacion = {
@@ -12,7 +13,29 @@ programacion = {
     'Domingo': ['', '']
 }
 
+def obtener_horas_desde_txt():
+    """
+    Lee las dos horas desde el archivo hora_cap.txt y las devuelve como una tupla (hora1, hora2).
+    """
+    try:
+        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        ruta_txt = os.path.join(base_dir, "captura", "hora_programada", "hora_cap.txt")
+        with open(ruta_txt, "r", encoding="utf-8") as f:
+            lineas = [line.strip() for line in f.readlines() if line.strip()]
+            horas = []
+            for linea in lineas:
+                if ": " in linea:
+                    _, hora = linea.split(": ", 1)
+                    horas.append(hora.strip())
+            # Rellenar si falta alguna
+            while len(horas) < 2:
+                horas.append("")
+            return horas[0], horas[1]
+    except:
+        return "", ""
+
 def mostrar_configuracion_avanzada():
+    hora1_txt, hora2_txt = obtener_horas_desde_txt()
     dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo']
     
     ventana = tk.Toplevel()
@@ -33,10 +56,12 @@ def mostrar_configuracion_avanzada():
 
     tk.Label(ventana, text="Hora 1era Captura").grid(row=3, column=0, sticky='e')
     entry_hora1 = tk.Entry(ventana)
+    entry_hora1.insert(0, hora1_txt)
     entry_hora1.grid(row=3, column=1)
 
     tk.Label(ventana, text="Hora 2da Captura").grid(row=4, column=0, sticky='e')
     entry_hora2 = tk.Entry(ventana)
+    entry_hora2.insert(0, hora2_txt)
     entry_hora2.grid(row=4, column=1)
 
     # Tabla

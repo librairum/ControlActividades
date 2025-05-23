@@ -107,6 +107,8 @@ def crear_interfaz():
         if not dni:
             messagebox.showwarning("Campo vacío", "Por favor, ingrese su número de DNI.")
             return
+        else:
+            messagebox.showinfo("DNI","DNI guardado correctamente")
 
         horas = leer_horas_programadas()
         caps_dir, bin_dir, db_path = obtener_paths()
@@ -130,7 +132,7 @@ def crear_interfaz():
                 conn.executemany(
                     "INSERT INTO fotos (dni, nombre_equipo, fecha, hora, imagen_en_bytes) VALUES (?, ?, ?, ?, ?)",
                     capturas)
-            messagebox.showinfo("capturas guardados correctamente.")
+            messagebox.showinfo("Captura","capturas guardadas correctamente.")
 
         threading.Thread(target=tarea).start()
 
