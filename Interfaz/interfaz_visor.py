@@ -6,6 +6,7 @@ import psutil, mss
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from conf_avanz import mostrar_configuracion_avanzada
+from activity import main2
 
 # === FUNCIONES AUXILIARES ===
 
@@ -94,12 +95,9 @@ def crear_interfaz():
     for col in range(3): frame.columnconfigure(col, weight=1)
 
     # Entrada DNI
-    tk.Label(frame, text="Coloque su DNI:").grid(row=3, column=0, padx=5, pady=10, sticky="e")
+    tk.Label(frame, text="Coloque su DNI:").grid(row=4, column=0, padx=5, pady=10, sticky="e")
     entry = tk.Entry(frame)
-    entry.grid(row=3, column=1, padx=5, pady=10, sticky="ew")
-
-    mensaje = tk.Label(frame, text="", fg="red")
-    mensaje.grid(row=4, column=0, columnspan=3)
+    entry.grid(row=4, column=1, padx=5, pady=10, sticky="ew")
 
     # Función principal
     def iniciar_programa():
@@ -145,11 +143,11 @@ def crear_interfaz():
         .grid(row=2, column=0, padx=5, pady=5, sticky="ew")
     tk.Button(frame, text="Configuracion Avanzada", command=mostrar_configuracion_avanzada)\
         .grid(row=2, column=1, padx=5, pady=5, sticky="ew")
-
+    tk.Button(frame, text="Filtro de Actividades", command=lambda: main2.abrir_filtro_actividades(entry.get()))\
+        .grid(row=3, column=0, padx=5, pady=5, sticky="ew")
     root.mainloop()
 
 # === EJECUCIÓN PRINCIPAL ===
-
 if __name__ == "__main__":
     if not esta_activitywatch_activo():
         messagebox.showerror("Error", "ActivityWatch no está en ejecución.\nPor favor, inicie primero ActivityWatch.")
