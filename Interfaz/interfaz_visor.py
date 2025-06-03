@@ -9,7 +9,7 @@ from conf_avanz import mostrar_configuracion_avanzada
 from activity import main2
 
 # === FUNCIONES AUXILIARES ===
-
+dni_guardado = None
 def leer_horas_programadas():
     """
     Lee las horas programadas desde 'captura/hora_programada/hora_cap.txt'
@@ -71,11 +71,14 @@ def esperar_hora(hora_objetivo):
     print("[Captura] ¡Hora alcanzada!")
 
 # === INTERFAZ GRÁFICA ===
-
 def crear_interfaz():
     root = tk.Tk()
     root.title("VisorActividad")
     root.resizable(False, False)
+
+    def detener_programa():
+        root.destroy()
+        sys.exit()
 
     # Dimensiones y centrado
     ancho_ventana, alto_ventana = 500, 250
@@ -101,11 +104,13 @@ def crear_interfaz():
 
     # Función principal
     def iniciar_programa():
+        global dni_guardado
         dni = entry.get().strip()
         if not dni:
             messagebox.showwarning("Campo vacío", "Por favor, ingrese su número de DNI.")
             return
         else:
+            dni_guardado=dni
             messagebox.showinfo("DNI","DNI guardado correctamente")
 
         horas = leer_horas_programadas()
@@ -137,13 +142,18 @@ def crear_interfaz():
     # Botones
     tk.Button(frame, text="Iniciar Programa", command=iniciar_programa)\
         .grid(row=1, column=0, padx=5, pady=5, sticky="ew")
-    tk.Button(frame, text="Detener Programa")\
+    tk.Button(frame, text="Detener Programa", command=detener_programa)\
         .grid(row=1, column=1, padx=5, pady=5, sticky="ew")
     tk.Button(frame, text="Programa horario")\
         .grid(row=2, column=0, padx=5, pady=5, sticky="ew")
     tk.Button(frame, text="Configuracion Avanzada", command=mostrar_configuracion_avanzada)\
         .grid(row=2, column=1, padx=5, pady=5, sticky="ew")
-    tk.Button(frame, text="Filtro de Actividades", command=lambda: main2.abrir_filtro_actividades(entry.get()))\
+    def abrir_filtro_si_hay_dni():
+        if not dni_guardado:
+            messagebox.showwarning("Advertencia", "Primero debe ingresar y guardar su DNI.")
+            return
+        main2.abrir_filtro_actividades(dni_guardado)
+    tk.Button(frame, text="Filtro de Actividades", command=abrir_filtro_si_hay_dni)\
         .grid(row=3, column=0, padx=5, pady=5, sticky="ew")
     root.mainloop()
 
