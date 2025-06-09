@@ -1,11 +1,12 @@
 import os, sys, time, base64, socket, threading, sqlite3
+import winreg
 from datetime import datetime
 import tkinter as tk
 from tkinter import messagebox
 import psutil, mss
 
+from Interfaz.conf_avanz import mostrar_configuracion_avanzada
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from conf_avanz import mostrar_configuracion_avanzada
 from activity import main2
 
 # === FUNCIONES AUXILIARES ===
@@ -19,6 +20,7 @@ def leer_horas_programadas():
     try:
         base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
         ruta_txt = os.path.join(base_dir, "captura", "hora_programada", "hora_cap.txt")
+
         with open(ruta_txt, "r", encoding="utf-8") as archivo:
             for linea in archivo:
                 linea = linea.strip()
@@ -35,9 +37,45 @@ def leer_horas_programadas():
         messagebox.showerror("Error", f"Error al leer horas programadas: {e}")
     return horas
 
+def agregar_a_inicio():
+    clave = winreg.OpenKey(winreg.HKEY_CURRENT_USER,
+                           r"Software\Microsoft\Windows\CurrentVersion\Run",
+                           0, winreg.KEY_SET_VALUE)
+    ruta_ejecutable = os.path.realpath(sys.argv[0])
+    winreg.SetValueEx(clave, "VisorActividad", 0, winreg.REG_SZ, ruta_ejecutable)
+    winreg.CloseKey(clave)
+
+def eliminar_de_inicio():
+    try:
+        clave = winreg.OpenKey(winreg.HKEY_CURRENT_USER,
+                               r"Software\Microsoft\Windows\CurrentVersion\Run",
+                               0, winreg.KEY_SET_VALUE)
+        winreg.DeleteValue(clave, "VisorActividad")
+        winreg.CloseKey(clave)
+    except FileNotFoundError:
+        pass
+
 def esta_activitywatch_activo():
     return any(p.info['name'] in ['aw-server', 'aw-server.exe', 'aw-watcher-window', 'aw-watcher-window.exe']
                for p in psutil.process_iter(['name']))
+
+def verificar_activitywatch():
+    if esta_activitywatch_activo():
+        crear_interfaz()
+    else:
+        ventana_error = tk.Tk()
+        ventana_error.withdraw()  # Oculta la ventana principal
+
+        respuesta = messagebox.askretrycancel(
+            "Error", 
+            "ActivityWatch no está en ejecución.\n¿Desea reintentar?"
+        )
+        ventana_error.destroy()
+
+        if respuesta:
+            verificar_activitywatch()
+        else:
+            sys.exit()
 
 def obtener_paths():
     base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -79,6 +117,15 @@ def crear_interfaz():
     def detener_programa():
         root.destroy()
         sys.exit()
+    
+    def toggle_inicio():
+        if var_inicio.get():
+            agregar_a_inicio()
+            messagebox.showinfo("Inicio automático", "La app se ejecutará al iniciar Windows.")
+        else:
+            eliminar_de_inicio()
+            messagebox.showinfo("Inicio automático", "La app ya no se ejecutará al iniciar Windows.")
+
 
     # Dimensiones y centrado
     ancho_ventana, alto_ventana = 500, 250
@@ -88,6 +135,20 @@ def crear_interfaz():
 
     frame = tk.Frame(root, bd=2, relief="solid", padx=10, pady=10)
     frame.pack(padx=20, pady=20, fill='both', expand=True)
+
+    # Variable para el checkbutton de inicio automático
+    var_inicio = tk.BooleanVar()
+
+    # Verificar si ya está en el inicio automático
+    try:
+        clave = winreg.OpenKey(winreg.HKEY_CURRENT_USER,
+                            r"Software\Microsoft\Windows\CurrentVersion\Run")
+        valor_actual, _ = winreg.QueryValueEx(clave, "VisorActividad")
+        if os.path.realpath(sys.argv[0]) == valor_actual:
+            var_inicio.set(True)
+        winreg.CloseKey(clave)
+    except FileNotFoundError:
+        var_inicio.set(False)
 
     fila_titulo = tk.Frame(frame, bg="lightblue")
     fila_titulo.grid(row=0, column=0, columnspan=3, sticky="ew", pady=(0, 10))
@@ -155,11 +216,13 @@ def crear_interfaz():
         main2.abrir_filtro_actividades(dni_guardado)
     tk.Button(frame, text="Filtro de Actividades", command=abrir_filtro_si_hay_dni)\
         .grid(row=3, column=0, padx=5, pady=5, sticky="ew")
+    #Inicio automático
+    tk.Checkbutton(frame, text="Ejecutar al iniciar Windows",
+               variable=var_inicio, command=toggle_inicio)\
+    .grid(row=3, column=1, columnspan=2, padx=5, pady=10, sticky="w")
+
     root.mainloop()
 
 # === EJECUCIÓN PRINCIPAL ===
 if __name__ == "__main__":
-    if not esta_activitywatch_activo():
-        messagebox.showerror("Error", "ActivityWatch no está en ejecución.\nPor favor, inicie primero ActivityWatch.")
-    else:
-        crear_interfaz()
+    verificar_activitywatch()
