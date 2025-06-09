@@ -1,0 +1,1 @@
+Para iniciar la aplicación, se debe entrar a la carpeta dist y ejecutar el archivo interfaz_visor.exe
