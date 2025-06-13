@@ -1,5 +1,5 @@
-import os, sys, time, base64, socket, threading, sqlite3
-import winreg
+import os, sys, time, base64, socket, threading
+import winreg, traceback
 from datetime import datetime
 import tkinter as tk
 from tkinter import messagebox
@@ -12,6 +12,7 @@ if root_path not in sys.path:
 
 # IMPORTS ABSOLUTOS CORRECTOS
 from Interfaz.conf_avanz import mostrar_configuracion_avanzada
+from Interfaz.conexion_mysql import conectar_mysql
 from activity import main2
 
 # === FUNCIONES AUXILIARES ===
@@ -25,9 +26,8 @@ def leer_horas_programadas():
     try:
         #base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
         #base_dir = get_base_dir()
-        #ruta_txt = os.path.join(base_dir, "captura", "hora_programada", "hora_cap.txt")
         ruta_txt = obtener_ruta_relativa("captura/hora_programada/hora_cap.txt")
-
+        #ruta_txt = os.path.join(base_dir, "captura", "hora_programada", "hora_cap.txt")
         with open(ruta_txt, "r", encoding="utf-8") as archivo:
             for linea in archivo:
                 linea = linea.strip()
@@ -107,10 +107,10 @@ def obtener_paths():
     caps_dir = os.path.join(base_dir, "captura", "Screen_Caps")
     bin_dir = os.path.join(base_dir, "captura", "Img_to_Binary")
     #db_path = os.path.join(base_dir, "captura", "imagenes.db")
-    db_path = obtener_ruta_relativa("captura/imagenes.db")
+    #db_path = obtener_ruta_relativa("captura/imagenes.db")
     os.makedirs(caps_dir, exist_ok=True)
     os.makedirs(bin_dir, exist_ok=True)
-    return caps_dir, bin_dir, db_path
+    return caps_dir, bin_dir
 
 def tomar_captura_y_guardar(caps_dir):
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
@@ -201,7 +201,7 @@ def crear_interfaz():
             messagebox.showinfo("DNI","DNI guardado correctamente")
 
         horas = leer_horas_programadas()
-        caps_dir, bin_dir, db_path = obtener_paths()
+        caps_dir, bin_dir= obtener_paths()
 
         def tarea():
             capturas = []
@@ -218,14 +218,33 @@ def crear_interfaz():
                 imagen_bytes = base64.b64decode(b64)
                 capturas.append((dni, nombre_pc, fecha, hora_actual, imagen_bytes))
 
-            with sqlite3.connect(db_path) as conn:
-                conn.executemany(
-                    "INSERT INTO fotos (dni, nombre_equipo, fecha, hora, imagen_en_bytes) VALUES (?, ?, ?, ?, ?)",
-                    capturas)
-            messagebox.showinfo("Captura","capturas guardadas correctamente.")
+            # Guardar los datos en MySQL
+            conn = conectar_mysql()
+            if conn:
+                messagebox.showinfo("Conexion", "conexion exitosa con la BD.")
+                try:
+                    cursor = conn.cursor()
+                    sql = "INSERT INTO asistencia_imagenes (dni, nombre_equipo, fecha, hora, imagen_en_bytes) VALUES (%s, %s, %s, %s, %s)"
+                    cursor.executemany(sql, capturas)
+                    conn.commit()
+                    cursor.close()
+                    conn.close()
+                    messagebox.showinfo("Captura", "Capturas guardadas correctamente.")
+                except Exception as e:
+                    with open('error_log.txt', 'a') as log_file:
+                        log_file.write(f'Error: {str(e)}\n')
+                        log_file.write(traceback.format_exc())
+                    messagebox.showerror("Error", f"Error al guardar en MySQL: {e}")
+            else:
+                messagebox.showerror("Error", "No se pudo conectar a la base de datos MySQL.")
+
+            #with sqlite3.connect(db_path) as conn:
+                #conn.executemany(
+                    #"INSERT INTO fotos (dni, nombre_equipo, fecha, hora, imagen_en_bytes) VALUES (?, ?, ?, ?, ?)",
+                    #capturas)
 
         threading.Thread(target=tarea).start()
-
+    
     # Botones
     tk.Button(frame, text="Iniciar Programa", command=iniciar_programa)\
         .grid(row=1, column=0, padx=5, pady=5, sticky="ew")

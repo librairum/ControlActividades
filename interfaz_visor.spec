@@ -8,9 +8,11 @@ a = Analysis(
     binaries=[],
     datas=[
         ('captura\\hora_programada\\hora_cap.txt', 'captura\\hora_programada'),
-        ('captura\\imagenes.db', 'captura')
+        ('captura\\imagenes.db', 'captura'),
+        ('Interfaz/config.json', 'Interfaz'),
+        ('Interfaz/conexion_mysql.py', 'Interfaz')
     ],
-    hiddenimports=[],
+    hiddenimports=['mysql', 'mysql.connector'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

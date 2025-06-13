@@ -18,7 +18,8 @@
   <a target="code" href="///E:/VisualProyectos/python/Capturador/ControlActividades/Interfaz/interfaz_visor.py" type="text/plain"><tt>interfaz_visor.py</tt></a>
 <span class="moduletype">Script</span>  <div class="import">
 imports:
-    <a href="#Interfaz.conf_avanz">Interfaz.conf_avanz</a>
+    <a href="#Interfaz.conexion_mysql">Interfaz.conexion_mysql</a>
+ &#8226;   <a href="#Interfaz.conf_avanz">Interfaz.conf_avanz</a>
  &#8226;   <a href="#_collections_abc">_collections_abc</a>
  &#8226;   <a href="#_weakrefset">_weakrefset</a>
  &#8226;   <a href="#abc">abc</a>
@@ -161,6 +162,8 @@ imports:
  &#8226;   <a href="#linecache">linecache</a>
  &#8226;   <a href="#locale">locale</a>
  &#8226;   <a href="#mss">mss</a>
+ &#8226;   <a href="#mysql">mysql</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
  &#8226;   <a href="#ntpath">ntpath</a>
  &#8226;   <a href="#operator">operator</a>
  &#8226;   <a href="#os">os</a>
@@ -177,7 +180,6 @@ imports:
  &#8226;   <a href="#re._parser">re._parser</a>
  &#8226;   <a href="#reprlib">reprlib</a>
  &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#sqlite3">sqlite3</a>
  &#8226;   <a href="#sre_compile">sre_compile</a>
  &#8226;   <a href="#sre_constants">sre_constants</a>
  &#8226;   <a href="#sre_parse">sre_parse</a>
@@ -292,6 +294,17 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="'dns.resolver'"></a>
+  <a target="code" href="" type="text/plain"><tt>'dns.resolver'</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="'h2.connection'"></a>
   <a target="code" href="" type="text/plain"><tt>'h2.connection'</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
@@ -325,6 +338,41 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="'opentelemetry.sdk'"></a>
+  <a target="code" href="" type="text/plain"><tt>'opentelemetry.sdk'</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#mysql.connector.opentelemetry.constants">mysql.connector.opentelemetry.constants</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="'opentelemetry.semconv'"></a>
+  <a target="code" href="" type="text/plain"><tt>'opentelemetry.semconv'</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#mysql.connector.opentelemetry.constants">mysql.connector.opentelemetry.constants</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="'opentelemetry.trace'"></a>
+  <a target="code" href="" type="text/plain"><tt>'opentelemetry.trace'</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#mysql.connector.opentelemetry.context_propagation">mysql.connector.opentelemetry.context_propagation</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="'pyodide.ffi'"></a>
   <a target="code" href="" type="text/plain"><tt>'pyodide.ffi'</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
@@ -336,22 +384,32 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="ConfigParser"></a>
-  <a target="code" href="" type="text/plain"><tt>ConfigParser</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
+  <a name="Interfaz"></a>
+  <a target="code" href="///E:/VisualProyectos/python/Capturador/ControlActividades/Interfaz/__init__.py" type="text/plain"><tt>Interfaz</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
 imported by:
-    <a href="#mysql.connector.optionfiles">mysql.connector.optionfiles</a>
+    <a href="#Interfaz.conexion_mysql">Interfaz.conexion_mysql</a>
+ &#8226;   <a href="#Interfaz.conf_avanz">Interfaz.conf_avanz</a>
 
   </div>
 
 </div>
 
 <div class="node">
-  <a name="Interfaz"></a>
-  <a target="code" href="///E:/VisualProyectos/python/Capturador/ControlActividades/Interfaz/__init__.py" type="text/plain"><tt>Interfaz</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
+  <a name="Interfaz.conexion_mysql"></a>
+  <a target="code" href="///E:/VisualProyectos/python/Capturador/ControlActividades/Interfaz/conexion_mysql.py" type="text/plain"><tt>Interfaz.conexion_mysql</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#Interfaz">Interfaz</a>
+ &#8226;   <a href="#json">json</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#sys">sys</a>
+
+  </div>
+  <div class="import">
 imported by:
-    <a href="#Interfaz.conf_avanz">Interfaz.conf_avanz</a>
+    <a href="#interfaz_visor.py">interfaz_visor.py</a>
 
   </div>
 
@@ -382,17 +440,6 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#urllib3.contrib.pyopenssl">urllib3.contrib.pyopenssl</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="Queue"></a>
-  <a target="code" href="" type="text/plain"><tt>Queue</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
 
   </div>
 
@@ -450,7 +497,15 @@ imported by:
  &#8226;   <a href="#mss.screenshot">mss.screenshot</a>
  &#8226;   <a href="#mss.tools">mss.tools</a>
  &#8226;   <a href="#mss.windows">mss.windows</a>
- &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
+ &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
+ &#8226;   <a href="#mysql.connector.custom_types">mysql.connector.custom_types</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
+ &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
+ &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
  &#8226;   <a href="#psutil">psutil</a>
  &#8226;   <a href="#psutil._common">psutil._common</a>
  &#8226;   <a href="#pydoc">pydoc</a>
@@ -971,11 +1026,9 @@ imported by:
 
 <div class="node">
   <a name="_mysql_connector"></a>
-  <a target="code" href="" type="text/plain"><tt>_mysql_connector</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
+  <tt>_mysql_connector</tt> <span class="moduletype"><tt>C:\Users\Usuario\AppData\Local\Programs\Python\Python312\Lib\site-packages\_mysql_connector.cp312-win_amd64.pyd</tt></span>  <div class="import">
 imported by:
-    <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+    <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
  &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
 
   </div>
@@ -1197,16 +1250,6 @@ imported by:
 imported by:
     <a href="#socket">socket</a>
  &#8226;   <a href="#typing_extensions">typing_extensions</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="_sqlite3"></a>
-  <tt>_sqlite3</tt> <span class="moduletype"><tt>C:\Users\Usuario\AppData\Local\Programs\Python\Python312\DLLs\_sqlite3.pyd</tt></span>  <div class="import">
-imported by:
-    <a href="#sqlite3.dbapi2">sqlite3.dbapi2</a>
 
   </div>
 
@@ -1516,6 +1559,10 @@ imported by:
  &#8226;   <a href="#mss.base">mss.base</a>
  &#8226;   <a href="#multiprocessing.reduction">multiprocessing.reduction</a>
  &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
+ &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
  &#8226;   <a href="#numbers">numbers</a>
  &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#selectors">selectors</a>
@@ -1554,6 +1601,7 @@ imports:
  &#8226;   <a href="#datetime">datetime</a>
  &#8226;   <a href="#json">json</a>
  &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#pytz">pytz</a>
  &#8226;   <a href="#re">re</a>
  &#8226;   <a href="#requests">requests</a>
 
@@ -1597,6 +1645,9 @@ imports:
  &#8226;   <a href="#datetime">datetime</a>
  &#8226;   <a href="#json">json</a>
  &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#pytz">pytz</a>
+ &#8226;   <a href="#shutil">shutil</a>
+ &#8226;   <a href="#sys">sys</a>
  &#8226;   <a href="#tkcalendar">tkcalendar</a>
  &#8226;   <a href="#tkinter">tkinter</a>
  &#8226;   <a href="#tkinter.messagebox">tkinter.messagebox</a>
@@ -1638,7 +1689,6 @@ imported by:
  &#8226;   <a href="#http.server">http.server</a>
  &#8226;   <a href="#inspect">inspect</a>
  &#8226;   <a href="#py_compile">py_compile</a>
- &#8226;   <a href="#sqlite3.__main__">sqlite3.__main__</a>
  &#8226;   <a href="#tarfile">tarfile</a>
  &#8226;   <a href="#tokenize">tokenize</a>
  &#8226;   <a href="#unittest.main">unittest.main</a>
@@ -1656,6 +1706,7 @@ imported by:
     <a href="#multiprocessing.dummy">multiprocessing.dummy</a>
  &#8226;   <a href="#multiprocessing.managers">multiprocessing.managers</a>
  &#8226;   <a href="#multiprocessing.reduction">multiprocessing.reduction</a>
+ &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
  &#8226;   <a href="#socket">socket</a>
 
   </div>
@@ -1681,6 +1732,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#inspect">inspect</a>
+ &#8226;   <a href="#mysql.connector.optionfiles">mysql.connector.optionfiles</a>
  &#8226;   <a href="#traceback">traceback</a>
 
   </div>
@@ -2931,7 +2983,6 @@ imported by:
  &#8226;   <a href="#encodings.base64_codec">encodings.base64_codec</a>
  &#8226;   <a href="#http.server">http.server</a>
  &#8226;   <a href="#interfaz_visor.py">interfaz_visor.py</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
  &#8226;   <a href="#requests.auth">requests.auth</a>
  &#8226;   <a href="#secrets">secrets</a>
  &#8226;   <a href="#ssl">ssl</a>
@@ -2999,8 +3050,6 @@ imported by:
     <a href="#idna.core">idna.core</a>
  &#8226;   <a href="#idna.intranges">idna.intranges</a>
  &#8226;   <a href="#multiprocessing.heap">multiprocessing.heap</a>
- &#8226;   <a href="#mysql.connector.fabric.caching">mysql.connector.fabric.caching</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
  &#8226;   <a href="#pytz.tzinfo">pytz.tzinfo</a>
  &#8226;   <a href="#random">random</a>
  &#8226;   <a href="#statistics">statistics</a>
@@ -3439,7 +3488,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#pdb">pdb</a>
- &#8226;   <a href="#sqlite3.__main__">sqlite3.__main__</a>
 
   </div>
 
@@ -3662,11 +3710,9 @@ imported by:
  &#8226;   <a href="#multiprocessing.heap">multiprocessing.heap</a>
  &#8226;   <a href="#multiprocessing.pool">multiprocessing.pool</a>
  &#8226;   <a href="#multiprocessing.queues">multiprocessing.queues</a>
- &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
- &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
- &#8226;   <a href="#mysql.connector.fabric">mysql.connector.fabric</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
+ &#8226;   <a href="#mysql.connector._scripting">mysql.connector._scripting</a>
  &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
  &#8226;   <a href="#pkgutil">pkgutil</a>
  &#8226;   <a href="#platform">platform</a>
  &#8226;   <a href="#pprint">pprint</a>
@@ -3743,7 +3789,6 @@ imported by:
  &#8226;   <a href="#pytz.lazy">pytz.lazy</a>
  &#8226;   <a href="#requests.compat">requests.compat</a>
  &#8226;   <a href="#selectors">selectors</a>
- &#8226;   <a href="#sqlite3.dbapi2">sqlite3.dbapi2</a>
  &#8226;   <a href="#traceback">traceback</a>
  &#8226;   <a href="#tracemalloc">tracemalloc</a>
  &#8226;   <a href="#typing">typing</a>
@@ -3914,6 +3959,7 @@ imported by:
  &#8226;   <a href="#importlib.resources._adapters">importlib.resources._adapters</a>
  &#8226;   <a href="#importlib.resources._common">importlib.resources._common</a>
  &#8226;   <a href="#mss.linux">mss.linux</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
  &#8226;   <a href="#psutil">psutil</a>
  &#8226;   <a href="#psutil._common">psutil._common</a>
  &#8226;   <a href="#psutil._compat">psutil._compat</a>
@@ -4276,18 +4322,18 @@ imported by:
  &#8226;   <a href="#http.server">http.server</a>
  &#8226;   <a href="#interfaz_visor.py">interfaz_visor.py</a>
  &#8226;   <a href="#mss.base">mss.base</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
  &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
  &#8226;   <a href="#mysql.connector.dbapi">mysql.connector.dbapi</a>
- &#8226;   <a href="#mysql.connector.fabric.caching">mysql.connector.fabric.caching</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
  &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
  &#8226;   <a href="#psutil">psutil</a>
  &#8226;   <a href="#pytz">pytz</a>
  &#8226;   <a href="#pytz.tzfile">pytz.tzfile</a>
  &#8226;   <a href="#pytz.tzinfo">pytz.tzinfo</a>
  &#8226;   <a href="#requests.models">requests.models</a>
  &#8226;   <a href="#requests.sessions">requests.sessions</a>
- &#8226;   <a href="#sqlite3.dbapi2">sqlite3.dbapi2</a>
  &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
  &#8226;   <a href="#xmlrpc.client">xmlrpc.client</a>
  &#8226;   <a href="#zoneinfo._zoneinfo">zoneinfo._zoneinfo</a>
@@ -4310,10 +4356,13 @@ imported by:
     <a href="#babel.numbers">babel.numbers</a>
  &#8226;   <a href="#babel.plural">babel.plural</a>
  &#8226;   <a href="#fractions">fractions</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
  &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
- &#8226;   <a href="#mysql.connector.fabric.balancing">mysql.connector.fabric.balancing</a>
+ &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
  &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#statistics">statistics</a>
  &#8226;   <a href="#xmlrpc.client">xmlrpc.client</a>
 
@@ -4360,6 +4409,17 @@ imports:
 imported by:
     <a href="#inspect">inspect</a>
  &#8226;   <a href="#pdb">pdb</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="dns"></a>
+  <a target="code" href="" type="text/plain"><tt>dns</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
 
   </div>
 
@@ -7595,6 +7655,10 @@ imported by:
  &#8226;   <a href="#locale">locale</a>
  &#8226;   <a href="#multiprocessing.reduction">multiprocessing.reduction</a>
  &#8226;   <a href="#multiprocessing.shared_memory">multiprocessing.shared_memory</a>
+ &#8226;   <a href="#mysql.connector._decorating">mysql.connector._decorating</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#operator">operator</a>
  &#8226;   <a href="#pathlib">pathlib</a>
  &#8226;   <a href="#pdb">pdb</a>
@@ -7702,7 +7766,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#urllib.request">urllib.request</a>
+    <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#urllib.request">urllib.request</a>
 
   </div>
 
@@ -7826,9 +7891,7 @@ imports:
 imported by:
     <a href="#charset_normalizer.models">charset_normalizer.models</a>
  &#8226;   <a href="#hmac">hmac</a>
- &#8226;   <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
- &#8226;   <a href="#mysql.connector.fabric.caching">mysql.connector.fabric.caching</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
+ &#8226;   <a href="#mysql.connector.plugins.caching_sha2_password">mysql.connector.plugins.caching_sha2_password</a>
  &#8226;   <a href="#random">random</a>
  &#8226;   <a href="#requests.auth">requests.auth</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
@@ -7958,7 +8021,6 @@ imports:
 imported by:
     <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#http.server">http.server</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
  &#8226;   <a href="#urllib3.connection">urllib3.connection</a>
  &#8226;   <a href="#urllib3.contrib.emscripten.connection">urllib3.contrib.emscripten.connection</a>
@@ -8058,17 +8120,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#pydoc">pydoc</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="httplib"></a>
-  <a target="code" href="" type="text/plain"><tt>httplib</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
 
   </div>
 
@@ -8205,7 +8256,6 @@ imports:
  &#8226;   <a href="#importlib">importlib</a>
  &#8226;   <a href="#importlib._bootstrap">importlib._bootstrap</a>
  &#8226;   <a href="#importlib._bootstrap_external">importlib._bootstrap_external</a>
- &#8226;   <a href="#importlib.machinery">importlib.machinery</a>
  &#8226;   <a href="#sys">sys</a>
  &#8226;   <a href="#warnings">warnings</a>
 
@@ -8226,6 +8276,8 @@ imported by:
  &#8226;   <a href="#importlib.resources._common">importlib.resources._common</a>
  &#8226;   <a href="#importlib.util">importlib.util</a>
  &#8226;   <a href="#inspect">inspect</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#pkgutil">pkgutil</a>
  &#8226;   <a href="#requests.compat">requests.compat</a>
  &#8226;   <a href="#zoneinfo._common">zoneinfo._common</a>
@@ -8345,7 +8397,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#ctypes.util">ctypes.util</a>
- &#8226;   <a href="#importlib">importlib</a>
  &#8226;   <a href="#importlib.abc">importlib.abc</a>
  &#8226;   <a href="#inspect">inspect</a>
  &#8226;   <a href="#pkgutil">pkgutil</a>
@@ -8769,6 +8820,7 @@ imported by:
  &#8226;   <a href="#doctest">doctest</a>
  &#8226;   <a href="#importlib.metadata">importlib.metadata</a>
  &#8226;   <a href="#importlib.resources._common">importlib.resources._common</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
  &#8226;   <a href="#pdb">pdb</a>
  &#8226;   <a href="#pkgutil">pkgutil</a>
  &#8226;   <a href="#psutil._common">psutil._common</a>
@@ -8966,7 +9018,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#activity.aw_utils">activity.aw_utils</a>
+    <a href="#Interfaz.conexion_mysql">Interfaz.conexion_mysql</a>
+ &#8226;   <a href="#activity.aw_utils">activity.aw_utils</a>
  &#8226;   <a href="#activity.main2">activity.main2</a>
  &#8226;   <a href="#charset_normalizer.models">charset_normalizer.models</a>
  &#8226;   <a href="#json.decoder">json.decoder</a>
@@ -9144,8 +9197,7 @@ imported by:
  &#8226;   <a href="#hashlib">hashlib</a>
  &#8226;   <a href="#http.cookiejar">http.cookiejar</a>
  &#8226;   <a href="#multiprocessing.util">multiprocessing.util</a>
- &#8226;   <a href="#mysql.connector.fabric.caching">mysql.connector.fabric.caching</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
+ &#8226;   <a href="#mysql.connector.logger">mysql.connector.logger</a>
  &#8226;   <a href="#requests">requests</a>
  &#8226;   <a href="#unittest._log">unittest._log</a>
  &#8226;   <a href="#urllib3">urllib3</a>
@@ -9205,6 +9257,7 @@ imported by:
  &#8226;   <a href="#asyncio.windows_events">asyncio.windows_events</a>
  &#8226;   <a href="#babel.dates">babel.dates</a>
  &#8226;   <a href="#fractions">fractions</a>
+ &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
  &#8226;   <a href="#random">random</a>
  &#8226;   <a href="#selectors">selectors</a>
  &#8226;   <a href="#statistics">statistics</a>
@@ -10319,8 +10372,16 @@ imported by:
   <a name="mysql"></a>
   <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/__init__.py" type="text/plain"><tt>mysql</tt></a>
 <span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#mysql">mysql</a>
+
+  </div>
+  <div class="import">
 imported by:
-    <a href="#mysql.connector">mysql.connector</a>
+    <a href="#interfaz_visor.py">interfaz_visor.py</a>
+ &#8226;   <a href="#mysql">mysql</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
 
   </div>
 
@@ -10331,8 +10392,7 @@ imported by:
   <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/__init__.py" type="text/plain"><tt>mysql.connector</tt></a>
 <span class="moduletype">Package</span>  <div class="import">
 imports:
-    <a href="#_mysql_connector">_mysql_connector</a>
- &#8226;   <a href="#mysql">mysql</a>
+    <a href="#mysql">mysql</a>
  &#8226;   <a href="#mysql.connector">mysql.connector</a>
  &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
  &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
@@ -10340,20 +10400,20 @@ imports:
  &#8226;   <a href="#mysql.connector.dbapi">mysql.connector.dbapi</a>
  &#8226;   <a href="#mysql.connector.errorcode">mysql.connector.errorcode</a>
  &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
- &#8226;   <a href="#mysql.connector.fabric">mysql.connector.fabric</a>
- &#8226;   <a href="#mysql.connector.optionfiles">mysql.connector.optionfiles</a>
  &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
- &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#mysql.connector.version">mysql.connector.version</a>
 
   </div>
   <div class="import">
 imported by:
-    <a href="#activity.conexion_mysql">activity.conexion_mysql</a>
+    <a href="#Interfaz.conexion_mysql">Interfaz.conexion_mysql</a>
+ &#8226;   <a href="#activity.conexion_mysql">activity.conexion_mysql</a>
+ &#8226;   <a href="#interfaz_visor.py">interfaz_visor.py</a>
  &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector._decorating">mysql.connector._decorating</a>
+ &#8226;   <a href="#mysql.connector._scripting">mysql.connector._scripting</a>
  &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
  &#8226;   <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
  &#8226;   <a href="#mysql.connector.charsets">mysql.connector.charsets</a>
  &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
  &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
@@ -10365,15 +10425,68 @@ imported by:
  &#8226;   <a href="#mysql.connector.dbapi">mysql.connector.dbapi</a>
  &#8226;   <a href="#mysql.connector.errorcode">mysql.connector.errorcode</a>
  &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
- &#8226;   <a href="#mysql.connector.fabric">mysql.connector.fabric</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
  &#8226;   <a href="#mysql.connector.locales">mysql.connector.locales</a>
+ &#8226;   <a href="#mysql.connector.logger">mysql.connector.logger</a>
  &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry">mysql.connector.opentelemetry</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
  &#8226;   <a href="#mysql.connector.optionfiles">mysql.connector.optionfiles</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
  &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
  &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
+ &#8226;   <a href="#mysql.connector.tls_ciphers">mysql.connector.tls_ciphers</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
  &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#mysql.connector.version">mysql.connector.version</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="mysql.connector._decorating"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/_decorating.py" type="text/plain"><tt>mysql.connector._decorating</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#functools">functools</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#warnings">warnings</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+ &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
+ &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="mysql.connector._scripting"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/_scripting.py" type="text/plain"><tt>mysql.connector._scripting</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#collections">collections</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#unicodedata">unicodedata</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
+ &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
 
   </div>
 
@@ -10384,23 +10497,42 @@ imported by:
   <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/abstracts.py" type="text/plain"><tt>mysql.connector.abstracts</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#abc">abc</a>
+    <a href="#__future__">__future__</a>
+ &#8226;   <a href="#abc">abc</a>
+ &#8226;   <a href="#datetime">datetime</a>
+ &#8226;   <a href="#decimal">decimal</a>
+ &#8226;   <a href="#inspect">inspect</a>
  &#8226;   <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
+ &#8226;   <a href="#mysql.connector._decorating">mysql.connector._decorating</a>
  &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
  &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
  &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.constants">mysql.connector.opentelemetry.constants</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
  &#8226;   <a href="#mysql.connector.optionfiles">mysql.connector.optionfiles</a>
+ &#8226;   <a href="#mysql.connector.tls_ciphers">mysql.connector.tls_ciphers</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
+ &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#ssl">ssl</a>
  &#8226;   <a href="#time">time</a>
+ &#8226;   <a href="#types">types</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#weakref">weakref</a>
 
   </div>
   <div class="import">
 imported by:
-    <a href="#mysql.connector.connection">mysql.connector.connection</a>
+    <a href="#mysql.connector._decorating">mysql.connector._decorating</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
  &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
  &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
  &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.context_propagation">mysql.connector.opentelemetry.context_propagation</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
+ &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
 
   </div>
 
@@ -10411,49 +10543,20 @@ imported by:
   <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/authentication.py" type="text/plain"><tt>mysql.connector.authentication</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#hashlib">hashlib</a>
+    <a href="#__future__">__future__</a>
  &#8226;   <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
  &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
- &#8226;   <a href="#struct">struct</a>
+ &#8226;   <a href="#mysql.connector.logger">mysql.connector.logger</a>
+ &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
+ &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
+ &#8226;   <a href="#typing">typing</a>
 
   </div>
   <div class="import">
 imported by:
     <a href="#mysql.connector.connection">mysql.connector.connection</a>
- &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="mysql.connector.catch23"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/catch23.py" type="text/plain"><tt>mysql.connector.catch23</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#decimal">decimal</a>
- &#8226;   <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.custom_types">mysql.connector.custom_types</a>
- &#8226;   <a href="#struct">struct</a>
- &#8226;   <a href="#sys">sys</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
- &#8226;   <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
- &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
- &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
- &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
- &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
- &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
- &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
- &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
- &#8226;   <a href="#mysql.connector.optionfiles">mysql.connector.optionfiles</a>
- &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
- &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
 
   </div>
 
@@ -10465,6 +10568,7 @@ imported by:
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#typing">typing</a>
 
   </div>
   <div class="import">
@@ -10480,26 +10584,41 @@ imported by:
   <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/connection.py" type="text/plain"><tt>mysql.connector.connection</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#io">io</a>
+    <a href="#__future__">__future__</a>
+ &#8226;   <a href="#datetime">datetime</a>
+ &#8226;   <a href="#decimal">decimal</a>
+ &#8226;   <a href="#getpass">getpass</a>
+ &#8226;   <a href="#io">io</a>
  &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector._decorating">mysql.connector._decorating</a>
+ &#8226;   <a href="#mysql.connector._scripting">mysql.connector._scripting</a>
  &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
  &#8226;   <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
  &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
  &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
  &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
  &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.logger">mysql.connector.logger</a>
  &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.constants">mysql.connector.opentelemetry.constants</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.context_propagation">mysql.connector.opentelemetry.context_propagation</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
  &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
  &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
+ &#8226;   <a href="#mysql.connector.version">mysql.connector.version</a>
  &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#time">time</a>
+ &#8226;   <a href="#socket">socket</a>
+ &#8226;   <a href="#struct">struct</a>
+ &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#warnings">warnings</a>
 
   </div>
   <div class="import">
 imported by:
     <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
+ &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
  &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
 
   </div>
@@ -10513,17 +10632,32 @@ imported by:
 imports:
     <a href="#_mysql_connector">_mysql_connector</a>
  &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector._decorating">mysql.connector._decorating</a>
  &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
  &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
+ &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
  &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
  &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.constants">mysql.connector.opentelemetry.constants</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.context_propagation">mysql.connector.opentelemetry.context_propagation</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
  &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
+ &#8226;   <a href="#mysql.connector.version">mysql.connector.version</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#platform">platform</a>
+ &#8226;   <a href="#socket">socket</a>
+ &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#warnings">warnings</a>
 
   </div>
   <div class="import">
 imported by:
     <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
+ &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
 
   </div>
 
@@ -10534,21 +10668,28 @@ imported by:
   <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/constants.py" type="text/plain"><tt>mysql.connector.constants</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#mysql.connector">mysql.connector</a>
+    <a href="#abc">abc</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
  &#8226;   <a href="#mysql.connector.charsets">mysql.connector.charsets</a>
  &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.tls_ciphers">mysql.connector.tls_ciphers</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#warnings">warnings</a>
 
   </div>
   <div class="import">
 imported by:
     <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector._decorating">mysql.connector._decorating</a>
  &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
  &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
  &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
  &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
+ &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
  &#8226;   <a href="#mysql.connector.dbapi">mysql.connector.dbapi</a>
- &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
  &#8226;   <a href="#mysql.connector.optionfiles">mysql.connector.optionfiles</a>
+ &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
  &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
 
   </div>
@@ -10560,20 +10701,26 @@ imported by:
   <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/conversion.py" type="text/plain"><tt>mysql.connector.conversion</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#datetime">datetime</a>
+    <a href="#array">array</a>
+ &#8226;   <a href="#datetime">datetime</a>
  &#8226;   <a href="#decimal">decimal</a>
+ &#8226;   <a href="#math">math</a>
  &#8226;   <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
  &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
  &#8226;   <a href="#mysql.connector.custom_types">mysql.connector.custom_types</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
+ &#8226;   <a href="#struct">struct</a>
  &#8226;   <a href="#time">time</a>
+ &#8226;   <a href="#typing">typing</a>
 
   </div>
   <div class="import">
 imported by:
     <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
  &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+ &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
 
   </div>
 
@@ -10584,20 +10731,25 @@ imported by:
   <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/cursor.py" type="text/plain"><tt>mysql.connector.cursor</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#collections">collections</a>
+    <a href="#__future__">__future__</a>
+ &#8226;   <a href="#decimal">decimal</a>
  &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector._decorating">mysql.connector._decorating</a>
+ &#8226;   <a href="#mysql.connector._scripting">mysql.connector._scripting</a>
  &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
  &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
  &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#weakref">weakref</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#warnings">warnings</a>
 
   </div>
   <div class="import">
 imported by:
     <a href="#mysql.connector.connection">mysql.connector.connection</a>
  &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
 
   </div>
 
@@ -10608,16 +10760,19 @@ imported by:
   <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/cursor_cext.py" type="text/plain"><tt>mysql.connector.cursor_cext</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#_mysql_connector">_mysql_connector</a>
- &#8226;   <a href="#collections">collections</a>
+    <a href="#__future__">__future__</a>
+ &#8226;   <a href="#_mysql_connector">_mysql_connector</a>
  &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector._decorating">mysql.connector._decorating</a>
+ &#8226;   <a href="#mysql.connector._scripting">mysql.connector._scripting</a>
  &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
  &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
- &#8226;   <a href="#mysql.connector.errorcode">mysql.connector.errorcode</a>
  &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
  &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#weakref">weakref</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#warnings">warnings</a>
 
   </div>
   <div class="import">
@@ -10633,14 +10788,16 @@ imported by:
   <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/custom_types.py" type="text/plain"><tt>mysql.connector.custom_types</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#sys">sys</a>
+    <a href="#__future__">__future__</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#typing">typing</a>
 
   </div>
   <div class="import">
 imported by:
-    <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
- &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
+    <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
 
   </div>
 
@@ -10655,6 +10812,7 @@ imports:
  &#8226;   <a href="#mysql.connector">mysql.connector</a>
  &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
  &#8226;   <a href="#time">time</a>
+ &#8226;   <a href="#typing">typing</a>
 
   </div>
   <div class="import">
@@ -10676,8 +10834,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
  &#8226;   <a href="#mysql.connector.locales">mysql.connector.locales</a>
 
   </div>
@@ -10690,14 +10846,16 @@ imported by:
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
     <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
  &#8226;   <a href="#mysql.connector.locales">mysql.connector.locales</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
  &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
+ &#8226;   <a href="#typing">typing</a>
 
   </div>
   <div class="import">
 imported by:
     <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector._scripting">mysql.connector._scripting</a>
  &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
  &#8226;   <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
  &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
@@ -10705,114 +10863,11 @@ imported by:
  &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
  &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
  &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
  &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
+ &#8226;   <a href="#mysql.connector.plugins.caching_sha2_password">mysql.connector.plugins.caching_sha2_password</a>
  &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
  &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="mysql.connector.fabric"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/fabric/__init__.py" type="text/plain"><tt>mysql.connector.fabric</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#collections">collections</a>
- &#8226;   <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.fabric">mysql.connector.fabric</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.fabric">mysql.connector.fabric</a>
- &#8226;   <a href="#mysql.connector.fabric.balancing">mysql.connector.fabric.balancing</a>
- &#8226;   <a href="#mysql.connector.fabric.caching">mysql.connector.fabric.caching</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="mysql.connector.fabric.balancing"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/fabric/balancing.py" type="text/plain"><tt>mysql.connector.fabric.balancing</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#decimal">decimal</a>
- &#8226;   <a href="#mysql.connector.fabric">mysql.connector.fabric</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="mysql.connector.fabric.caching"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/fabric/caching.py" type="text/plain"><tt>mysql.connector.fabric.caching</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#bisect">bisect</a>
- &#8226;   <a href="#datetime">datetime</a>
- &#8226;   <a href="#hashlib">hashlib</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#mysql.connector.fabric">mysql.connector.fabric</a>
- &#8226;   <a href="#threading">threading</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="mysql.connector.fabric.connection"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/fabric/connection.py" type="text/plain"><tt>mysql.connector.fabric.connection</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#base64">base64</a>
- &#8226;   <a href="#bisect">bisect</a>
- &#8226;   <a href="#collections">collections</a>
- &#8226;   <a href="#datetime">datetime</a>
- &#8226;   <a href="#hashlib">hashlib</a>
- &#8226;   <a href="#http.client">http.client</a>
- &#8226;   <a href="#httplib">httplib</a>
- &#8226;   <a href="#logging">logging</a>
- &#8226;   <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
- &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
- &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
- &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
- &#8226;   <a href="#mysql.connector.errorcode">mysql.connector.errorcode</a>
- &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
- &#8226;   <a href="#mysql.connector.fabric">mysql.connector.fabric</a>
- &#8226;   <a href="#mysql.connector.fabric.balancing">mysql.connector.fabric.balancing</a>
- &#8226;   <a href="#mysql.connector.fabric.caching">mysql.connector.fabric.caching</a>
- &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
- &#8226;   <a href="#mysql.connector.version">mysql.connector.version</a>
- &#8226;   <a href="#socket">socket</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#time">time</a>
- &#8226;   <a href="#urllib.request">urllib.request</a>
- &#8226;   <a href="#urllib2">urllib2</a>
- &#8226;   <a href="#uuid">uuid</a>
- &#8226;   <a href="#xmlrpc.client">xmlrpc.client</a>
- &#8226;   <a href="#xmlrpclib">xmlrpclib</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#mysql.connector.fabric">mysql.connector.fabric</a>
 
   </div>
 
@@ -10825,6 +10880,7 @@ imported by:
 imports:
     <a href="#mysql.connector">mysql.connector</a>
  &#8226;   <a href="#mysql.connector.errorcode">mysql.connector.errorcode</a>
+ &#8226;   <a href="#typing">typing</a>
 
   </div>
   <div class="import">
@@ -10836,93 +10892,108 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="mysql.connector.logger"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/logger.py" type="text/plain"><tt>mysql.connector.logger</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#logging">logging</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
+ &#8226;   <a href="#mysql.connector.plugins.caching_sha2_password">mysql.connector.plugins.caching_sha2_password</a>
+ &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="mysql.connector.network"></a>
   <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/network.py" type="text/plain"><tt>mysql.connector.network</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#collections">collections</a>
+    <a href="#abc">abc</a>
+ &#8226;   <a href="#collections">collections</a>
  &#8226;   <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
- &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
  &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
  &#8226;   <a href="#socket">socket</a>
  &#8226;   <a href="#ssl">ssl</a>
  &#8226;   <a href="#struct">struct</a>
- &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#warnings">warnings</a>
  &#8226;   <a href="#zlib">zlib</a>
 
   </div>
   <div class="import">
 imported by:
-    <a href="#mysql.connector.connection">mysql.connector.connection</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="mysql.connector.optionfiles"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/optionfiles.py" type="text/plain"><tt>mysql.connector.optionfiles</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#ConfigParser">ConfigParser</a>
- &#8226;   <a href="#codecs">codecs</a>
- &#8226;   <a href="#configparser">configparser</a>
- &#8226;   <a href="#io">io</a>
- &#8226;   <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
- &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
- &#8226;   <a href="#os">os</a>
- &#8226;   <a href="#re">re</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="mysql.connector.pooling"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/pooling.py" type="text/plain"><tt>mysql.connector.pooling</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#Queue">Queue</a>
- &#8226;   <a href="#mysql.connector">mysql.connector</a>
+    <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
  &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
- &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
- &#8226;   <a href="#queue">queue</a>
- &#8226;   <a href="#re">re</a>
- &#8226;   <a href="#threading">threading</a>
- &#8226;   <a href="#uuid">uuid</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
+ &#8226;   <a href="#mysql.connector.plugins.caching_sha2_password">mysql.connector.plugins.caching_sha2_password</a>
+ &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
 
   </div>
 
 </div>
 
 <div class="node">
-  <a name="mysql.connector.protocol"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/protocol.py" type="text/plain"><tt>mysql.connector.protocol</tt></a>
+  <a name="mysql.connector.opentelemetry"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/opentelemetry/__init__.py" type="text/plain"><tt>mysql.connector.opentelemetry</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#mysql.connector">mysql.connector</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector.opentelemetry.constants">mysql.connector.opentelemetry.constants</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.context_propagation">mysql.connector.opentelemetry.context_propagation</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="mysql.connector.opentelemetry.constants"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/opentelemetry/constants.py" type="text/plain"><tt>mysql.connector.opentelemetry.constants</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#datetime">datetime</a>
- &#8226;   <a href="#decimal">decimal</a>
- &#8226;   <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
- &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
- &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
- &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
- &#8226;   <a href="#struct">struct</a>
+    <a href="#'opentelemetry.sdk'">'opentelemetry.sdk'</a>
+ &#8226;   <a href="#'opentelemetry.semconv'">'opentelemetry.semconv'</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry">mysql.connector.opentelemetry</a>
+ &#8226;   <a href="#opentelemetry">opentelemetry</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.context_propagation">mysql.connector.opentelemetry.context_propagation</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="mysql.connector.opentelemetry.context_propagation"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/opentelemetry/context_propagation.py" type="text/plain"><tt>mysql.connector.opentelemetry.context_propagation</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#'opentelemetry.trace'">'opentelemetry.trace'</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry">mysql.connector.opentelemetry</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.constants">mysql.connector.opentelemetry.constants</a>
+ &#8226;   <a href="#opentelemetry">opentelemetry</a>
+ &#8226;   <a href="#typing">typing</a>
 
   </div>
   <div class="import">
@@ -10935,20 +11006,261 @@ imported by:
 </div>
 
 <div class="node">
-  <a name="mysql.connector.utils"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/utils.py" type="text/plain"><tt>mysql.connector.utils</tt></a>
+  <a name="mysql.connector.opentelemetry.instrumentation"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/opentelemetry/instrumentation.py" type="text/plain"><tt>mysql.connector.opentelemetry.instrumentation</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#__future__">__future__</a>
+    <a href="#'opentelemetry.sdk'">'opentelemetry.sdk'</a>
+ &#8226;   <a href="#'opentelemetry.semconv'">'opentelemetry.semconv'</a>
+ &#8226;   <a href="#__future__">__future__</a>
+ &#8226;   <a href="#abc">abc</a>
+ &#8226;   <a href="#contextlib">contextlib</a>
+ &#8226;   <a href="#functools">functools</a>
+ &#8226;   <a href="#mysql">mysql</a>
  &#8226;   <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
+ &#8226;   <a href="#mysql.connector.logger">mysql.connector.logger</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry">mysql.connector.opentelemetry</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.constants">mysql.connector.opentelemetry.constants</a>
+ &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
+ &#8226;   <a href="#mysql.connector.version">mysql.connector.version</a>
+ &#8226;   <a href="#opentelemetry">opentelemetry</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="mysql.connector.optionfiles"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/optionfiles.py" type="text/plain"><tt>mysql.connector.optionfiles</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#ast">ast</a>
+ &#8226;   <a href="#codecs">codecs</a>
+ &#8226;   <a href="#configparser">configparser</a>
+ &#8226;   <a href="#io">io</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="mysql.connector.plugins"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/plugins/__init__.py" type="text/plain"><tt>mysql.connector.plugins</tt></a>
+<span class="moduletype">Package</span>  <div class="import">
+imports:
+    <a href="#abc">abc</a>
+ &#8226;   <a href="#functools">functools</a>
+ &#8226;   <a href="#importlib">importlib</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.logger">mysql.connector.logger</a>
+ &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
+ &#8226;   <a href="#mysql.connector.plugins.caching_sha2_password">mysql.connector.plugins.caching_sha2_password</a>
+ &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="mysql.connector.plugins.caching_sha2_password"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/plugins/caching_sha2_password.py" type="text/plain"><tt>mysql.connector.plugins.caching_sha2_password</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#hashlib">hashlib</a>
+ &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.logger">mysql.connector.logger</a>
+ &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
  &#8226;   <a href="#struct">struct</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="mysql.connector.pooling"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/pooling.py" type="text/plain"><tt>mysql.connector.pooling</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#'dns.resolver'">'dns.resolver'</a>
+ &#8226;   <a href="#__future__">__future__</a>
+ &#8226;   <a href="#dns">dns</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+ &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
+ &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.optionfiles">mysql.connector.optionfiles</a>
+ &#8226;   <a href="#queue">queue</a>
+ &#8226;   <a href="#random">random</a>
+ &#8226;   <a href="#re">re</a>
+ &#8226;   <a href="#threading">threading</a>
+ &#8226;   <a href="#types">types</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#uuid">uuid</a>
 
   </div>
   <div class="import">
 imported by:
     <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="mysql.connector.protocol"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/protocol.py" type="text/plain"><tt>mysql.connector.protocol</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#__future__">__future__</a>
+ &#8226;   <a href="#collections">collections</a>
+ &#8226;   <a href="#datetime">datetime</a>
+ &#8226;   <a href="#decimal">decimal</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
+ &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
+ &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.logger">mysql.connector.logger</a>
+ &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
+ &#8226;   <a href="#mysql.connector.plugins.caching_sha2_password">mysql.connector.plugins.caching_sha2_password</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
+ &#8226;   <a href="#struct">struct</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
  &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="mysql.connector.tls_ciphers"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/tls_ciphers.py" type="text/plain"><tt>mysql.connector.tls_ciphers</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="mysql.connector.types"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/types.py" type="text/plain"><tt>mysql.connector.types</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#datetime">datetime</a>
+ &#8226;   <a href="#decimal">decimal</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector.custom_types">mysql.connector.custom_types</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#time">time</a>
+ &#8226;   <a href="#typing">typing</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector._scripting">mysql.connector._scripting</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+ &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
+ &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
+ &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
+ &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="mysql.connector.utils"></a>
+  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/site-packages/mysql/connector/utils.py" type="text/plain"><tt>mysql.connector.utils</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#decimal">decimal</a>
+ &#8226;   <a href="#functools">functools</a>
+ &#8226;   <a href="#importlib">importlib</a>
+ &#8226;   <a href="#mysql.connector">mysql.connector</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.custom_types">mysql.connector.custom_types</a>
+ &#8226;   <a href="#mysql.connector.tls_ciphers">mysql.connector.tls_ciphers</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
+ &#8226;   <a href="#os">os</a>
+ &#8226;   <a href="#platform">platform</a>
+ &#8226;   <a href="#stringprep">stringprep</a>
+ &#8226;   <a href="#struct">struct</a>
+ &#8226;   <a href="#subprocess">subprocess</a>
+ &#8226;   <a href="#sys">sys</a>
+ &#8226;   <a href="#typing">typing</a>
+ &#8226;   <a href="#unicodedata">unicodedata</a>
+ &#8226;   <a href="#warnings">warnings</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+ &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
  &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
  &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
 
@@ -10967,7 +11279,9 @@ imports:
   <div class="import">
 imported by:
     <a href="#mysql.connector">mysql.connector</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
 
   </div>
 
@@ -11083,6 +11397,19 @@ imported by:
 </div>
 
 <div class="node">
+  <a name="opentelemetry"></a>
+  <a target="code" href="" type="text/plain"><tt>opentelemetry</tt></a>
+<span class="moduletype">MissingModule</span>  <div class="import">
+imported by:
+    <a href="#mysql.connector.opentelemetry.constants">mysql.connector.opentelemetry.constants</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.context_propagation">mysql.connector.opentelemetry.context_propagation</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
+
+  </div>
+
+</div>
+
+<div class="node">
   <a name="operator"></a>
   <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/operator.py" type="text/plain"><tt>operator</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
@@ -11135,7 +11462,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#Interfaz.conf_avanz">Interfaz.conf_avanz</a>
+    <a href="#Interfaz.conexion_mysql">Interfaz.conexion_mysql</a>
+ &#8226;   <a href="#Interfaz.conf_avanz">Interfaz.conf_avanz</a>
  &#8226;   <a href="#_aix_support">_aix_support</a>
  &#8226;   <a href="#activity.aw_utils">activity.aw_utils</a>
  &#8226;   <a href="#activity.conexion_mysql">activity.conexion_mysql</a>
@@ -11205,8 +11533,12 @@ imported by:
  &#8226;   <a href="#multiprocessing.shared_memory">multiprocessing.shared_memory</a>
  &#8226;   <a href="#multiprocessing.spawn">multiprocessing.spawn</a>
  &#8226;   <a href="#multiprocessing.util">multiprocessing.util</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
  &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
  &#8226;   <a href="#mysql.connector.optionfiles">mysql.connector.optionfiles</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#netrc">netrc</a>
  &#8226;   <a href="#ntpath">ntpath</a>
  &#8226;   <a href="#os.path">os.path</a>
@@ -11449,6 +11781,8 @@ imports:
 imported by:
     <a href="#mss.darwin">mss.darwin</a>
  &#8226;   <a href="#mss.factory">mss.factory</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#psutil._compat">psutil._compat</a>
  &#8226;   <a href="#pydoc">pydoc</a>
  &#8226;   <a href="#uuid">uuid</a>
@@ -11843,7 +12177,9 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#babel.dates">babel.dates</a>
+    <a href="#activity.aw_utils">activity.aw_utils</a>
+ &#8226;   <a href="#activity.main2">activity.main2</a>
+ &#8226;   <a href="#babel.dates">babel.dates</a>
  &#8226;   <a href="#babel.localtime._helpers">babel.localtime._helpers</a>
  &#8226;   <a href="#pytz">pytz</a>
  &#8226;   <a href="#pytz.exceptions">pytz.exceptions</a>
@@ -12008,6 +12344,7 @@ imports:
 imported by:
     <a href="#email.generator">email.generator</a>
  &#8226;   <a href="#email.utils">email.utils</a>
+ &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
  &#8226;   <a href="#secrets">secrets</a>
  &#8226;   <a href="#statistics">statistics</a>
  &#8226;   <a href="#tempfile">tempfile</a>
@@ -12091,9 +12428,11 @@ imported by:
  &#8226;   <a href="#json.scanner">json.scanner</a>
  &#8226;   <a href="#locale">locale</a>
  &#8226;   <a href="#logging">logging</a>
+ &#8226;   <a href="#mysql.connector._scripting">mysql.connector._scripting</a>
  &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
  &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
  &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
  &#8226;   <a href="#mysql.connector.optionfiles">mysql.connector.optionfiles</a>
  &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
  &#8226;   <a href="#pathlib">pathlib</a>
@@ -12876,7 +13215,8 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#argparse">argparse</a>
+    <a href="#activity.main2">activity.main2</a>
+ &#8226;   <a href="#argparse">argparse</a>
  &#8226;   <a href="#ctypes.util">ctypes.util</a>
  &#8226;   <a href="#http.server">http.server</a>
  &#8226;   <a href="#multiprocessing.util">multiprocessing.util</a>
@@ -12969,7 +13309,8 @@ imported by:
  &#8226;   <a href="#multiprocessing.forkserver">multiprocessing.forkserver</a>
  &#8226;   <a href="#multiprocessing.reduction">multiprocessing.reduction</a>
  &#8226;   <a href="#multiprocessing.resource_sharer">multiprocessing.resource_sharer</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
  &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
  &#8226;   <a href="#platform">platform</a>
  &#8226;   <a href="#psutil">psutil</a>
@@ -13025,87 +13366,6 @@ imported by:
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
     <a href="#urllib3.contrib.socks">urllib3.contrib.socks</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="sqlite3"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/sqlite3/__init__.py" type="text/plain"><tt>sqlite3</tt></a>
-<span class="moduletype">Package</span>  <div class="import">
-imports:
-    <a href="#sqlite3">sqlite3</a>
- &#8226;   <a href="#sqlite3.__main__">sqlite3.__main__</a>
- &#8226;   <a href="#sqlite3.dbapi2">sqlite3.dbapi2</a>
- &#8226;   <a href="#sqlite3.dump">sqlite3.dump</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#interfaz_visor.py">interfaz_visor.py</a>
- &#8226;   <a href="#sqlite3">sqlite3</a>
- &#8226;   <a href="#sqlite3.__main__">sqlite3.__main__</a>
- &#8226;   <a href="#sqlite3.dbapi2">sqlite3.dbapi2</a>
- &#8226;   <a href="#sqlite3.dump">sqlite3.dump</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="sqlite3.__main__"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/sqlite3/__main__.py" type="text/plain"><tt>sqlite3.__main__</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#argparse">argparse</a>
- &#8226;   <a href="#code">code</a>
- &#8226;   <a href="#sqlite3">sqlite3</a>
- &#8226;   <a href="#sys">sys</a>
- &#8226;   <a href="#textwrap">textwrap</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#sqlite3">sqlite3</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="sqlite3.dbapi2"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/sqlite3/dbapi2.py" type="text/plain"><tt>sqlite3.dbapi2</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#_sqlite3">_sqlite3</a>
- &#8226;   <a href="#collections.abc">collections.abc</a>
- &#8226;   <a href="#datetime">datetime</a>
- &#8226;   <a href="#sqlite3">sqlite3</a>
- &#8226;   <a href="#time">time</a>
- &#8226;   <a href="#warnings">warnings</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#sqlite3">sqlite3</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="sqlite3.dump"></a>
-  <a target="code" href="///C:/Users/Usuario/AppData/Local/Programs/Python/Python312/Lib/sqlite3/dump.py" type="text/plain"><tt>sqlite3.dump</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#sqlite3">sqlite3</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#sqlite3">sqlite3</a>
 
   </div>
 
@@ -13190,6 +13450,7 @@ imported by:
  &#8226;   <a href="#asyncio.sslproto">asyncio.sslproto</a>
  &#8226;   <a href="#ftplib">ftplib</a>
  &#8226;   <a href="#http.client">http.client</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
  &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
  &#8226;   <a href="#requests">requests</a>
  &#8226;   <a href="#requests.adapters">requests.adapters</a>
@@ -13301,6 +13562,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#encodings.idna">encodings.idna</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
 
   </div>
 
@@ -13327,9 +13589,10 @@ imported by:
  &#8226;   <a href="#multiprocessing.forkserver">multiprocessing.forkserver</a>
  &#8226;   <a href="#multiprocessing.shared_memory">multiprocessing.shared_memory</a>
  &#8226;   <a href="#multiprocessing.synchronize">multiprocessing.synchronize</a>
- &#8226;   <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
  &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.plugins.caching_sha2_password">mysql.connector.plugins.caching_sha2_password</a>
  &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
  &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#pickle">pickle</a>
@@ -13385,6 +13648,7 @@ imported by:
  &#8226;   <a href="#ctypes.util">ctypes.util</a>
  &#8226;   <a href="#http.server">http.server</a>
  &#8226;   <a href="#multiprocessing.util">multiprocessing.util</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#platform">platform</a>
  &#8226;   <a href="#psutil">psutil</a>
@@ -13402,11 +13666,13 @@ imported by:
   <a name="sys"></a>
   <tt>sys</tt> <span class="moduletype"><i>(builtin module)</i></span>  <div class="import">
 imported by:
-    <a href="#_aix_support">_aix_support</a>
+    <a href="#Interfaz.conexion_mysql">Interfaz.conexion_mysql</a>
+ &#8226;   <a href="#_aix_support">_aix_support</a>
  &#8226;   <a href="#_collections_abc">_collections_abc</a>
  &#8226;   <a href="#_compression">_compression</a>
  &#8226;   <a href="#_pydatetime">_pydatetime</a>
  &#8226;   <a href="#_pydecimal">_pydecimal</a>
+ &#8226;   <a href="#activity.main2">activity.main2</a>
  &#8226;   <a href="#argparse">argparse</a>
  &#8226;   <a href="#ast">ast</a>
  &#8226;   <a href="#asyncio">asyncio</a>
@@ -13485,10 +13751,9 @@ imported by:
  &#8226;   <a href="#multiprocessing.spawn">multiprocessing.spawn</a>
  &#8226;   <a href="#multiprocessing.synchronize">multiprocessing.synchronize</a>
  &#8226;   <a href="#multiprocessing.util">multiprocessing.util</a>
- &#8226;   <a href="#mysql.connector.catch23">mysql.connector.catch23</a>
- &#8226;   <a href="#mysql.connector.custom_types">mysql.connector.custom_types</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
- &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#ntpath">ntpath</a>
  &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#pathlib">pathlib</a>
@@ -13520,7 +13785,6 @@ imported by:
  &#8226;   <a href="#shutil">shutil</a>
  &#8226;   <a href="#socket">socket</a>
  &#8226;   <a href="#socketserver">socketserver</a>
- &#8226;   <a href="#sqlite3.__main__">sqlite3.__main__</a>
  &#8226;   <a href="#ssl">ssl</a>
  &#8226;   <a href="#statistics">statistics</a>
  &#8226;   <a href="#subprocess">subprocess</a>
@@ -13686,7 +13950,6 @@ imported by:
  &#8226;   <a href="#importlib.metadata">importlib.metadata</a>
  &#8226;   <a href="#importlib.metadata._adapters">importlib.metadata._adapters</a>
  &#8226;   <a href="#pydoc">pydoc</a>
- &#8226;   <a href="#sqlite3.__main__">sqlite3.__main__</a>
  &#8226;   <a href="#traceback">traceback</a>
 
   </div>
@@ -13744,7 +14007,6 @@ imported by:
  &#8226;   <a href="#multiprocessing.resource_tracker">multiprocessing.resource_tracker</a>
  &#8226;   <a href="#multiprocessing.synchronize">multiprocessing.synchronize</a>
  &#8226;   <a href="#multiprocessing.util">multiprocessing.util</a>
- &#8226;   <a href="#mysql.connector.fabric.caching">mysql.connector.fabric.caching</a>
  &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
  &#8226;   <a href="#psutil">psutil</a>
  &#8226;   <a href="#psutil._common">psutil._common</a>
@@ -13801,10 +14063,9 @@ imported by:
  &#8226;   <a href="#multiprocessing.queues">multiprocessing.queues</a>
  &#8226;   <a href="#multiprocessing.synchronize">multiprocessing.synchronize</a>
  &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
- &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
  &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
  &#8226;   <a href="#mysql.connector.dbapi">mysql.connector.dbapi</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
  &#8226;   <a href="#psutil">psutil</a>
  &#8226;   <a href="#psutil._pswindows">psutil._pswindows</a>
  &#8226;   <a href="#pydoc">pydoc</a>
@@ -13814,7 +14075,6 @@ imported by:
  &#8226;   <a href="#requests.cookies">requests.cookies</a>
  &#8226;   <a href="#requests.sessions">requests.sessions</a>
  &#8226;   <a href="#socketserver">socketserver</a>
- &#8226;   <a href="#sqlite3.dbapi2">sqlite3.dbapi2</a>
  &#8226;   <a href="#ssl">ssl</a>
  &#8226;   <a href="#subprocess">subprocess</a>
  &#8226;   <a href="#tarfile">tarfile</a>
@@ -14243,6 +14503,8 @@ imported by:
  &#8226;   <a href="#multiprocessing.queues">multiprocessing.queues</a>
  &#8226;   <a href="#multiprocessing.shared_memory">multiprocessing.shared_memory</a>
  &#8226;   <a href="#multiprocessing.spawn">multiprocessing.spawn</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
  &#8226;   <a href="#pickle">pickle</a>
  &#8226;   <a href="#pkgutil">pkgutil</a>
  &#8226;   <a href="#pprint">pprint</a>
@@ -14321,6 +14583,32 @@ imported by:
  &#8226;   <a href="#mss.screenshot">mss.screenshot</a>
  &#8226;   <a href="#mss.tools">mss.tools</a>
  &#8226;   <a href="#mss.windows">mss.windows</a>
+ &#8226;   <a href="#mysql.connector._decorating">mysql.connector._decorating</a>
+ &#8226;   <a href="#mysql.connector._scripting">mysql.connector._scripting</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
+ &#8226;   <a href="#mysql.connector.authentication">mysql.connector.authentication</a>
+ &#8226;   <a href="#mysql.connector.charsets">mysql.connector.charsets</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+ &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
+ &#8226;   <a href="#mysql.connector.conversion">mysql.connector.conversion</a>
+ &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
+ &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
+ &#8226;   <a href="#mysql.connector.custom_types">mysql.connector.custom_types</a>
+ &#8226;   <a href="#mysql.connector.dbapi">mysql.connector.dbapi</a>
+ &#8226;   <a href="#mysql.connector.errors">mysql.connector.errors</a>
+ &#8226;   <a href="#mysql.connector.locales">mysql.connector.locales</a>
+ &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.context_propagation">mysql.connector.opentelemetry.context_propagation</a>
+ &#8226;   <a href="#mysql.connector.opentelemetry.instrumentation">mysql.connector.opentelemetry.instrumentation</a>
+ &#8226;   <a href="#mysql.connector.optionfiles">mysql.connector.optionfiles</a>
+ &#8226;   <a href="#mysql.connector.plugins">mysql.connector.plugins</a>
+ &#8226;   <a href="#mysql.connector.plugins.caching_sha2_password">mysql.connector.plugins.caching_sha2_password</a>
+ &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
+ &#8226;   <a href="#mysql.connector.protocol">mysql.connector.protocol</a>
+ &#8226;   <a href="#mysql.connector.tls_ciphers">mysql.connector.tls_ciphers</a>
+ &#8226;   <a href="#mysql.connector.types">mysql.connector.types</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#pdb">pdb</a>
  &#8226;   <a href="#requests.adapters">requests.adapters</a>
  &#8226;   <a href="#typing_extensions">typing_extensions</a>
@@ -14800,6 +15088,8 @@ imported by:
     <a href="#charset_normalizer.utils">charset_normalizer.utils</a>
  &#8226;   <a href="#encodings.idna">encodings.idna</a>
  &#8226;   <a href="#idna.core">idna.core</a>
+ &#8226;   <a href="#mysql.connector._scripting">mysql.connector._scripting</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#re._parser">re._parser</a>
  &#8226;   <a href="#stringprep">stringprep</a>
  &#8226;   <a href="#traceback">traceback</a>
@@ -15190,7 +15480,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#http.cookiejar">http.cookiejar</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
  &#8226;   <a href="#requests.compat">requests.compat</a>
  &#8226;   <a href="#xml.sax.saxutils">xml.sax.saxutils</a>
 
@@ -15211,17 +15500,6 @@ imports:
 imported by:
     <a href="#urllib.error">urllib.error</a>
  &#8226;   <a href="#urllib.request">urllib.request</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="urllib2"></a>
-  <a target="code" href="" type="text/plain"><tt>urllib2</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
 
   </div>
 
@@ -16338,8 +16616,7 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
- &#8226;   <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
+    <a href="#mysql.connector.pooling">mysql.connector.pooling</a>
 
   </div>
 
@@ -16411,6 +16688,14 @@ imported by:
  &#8226;   <a href="#multiprocessing.forkserver">multiprocessing.forkserver</a>
  &#8226;   <a href="#multiprocessing.pool">multiprocessing.pool</a>
  &#8226;   <a href="#multiprocessing.resource_tracker">multiprocessing.resource_tracker</a>
+ &#8226;   <a href="#mysql.connector._decorating">mysql.connector._decorating</a>
+ &#8226;   <a href="#mysql.connector.connection">mysql.connector.connection</a>
+ &#8226;   <a href="#mysql.connector.connection_cext">mysql.connector.connection_cext</a>
+ &#8226;   <a href="#mysql.connector.constants">mysql.connector.constants</a>
+ &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
+ &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
+ &#8226;   <a href="#mysql.connector.network">mysql.connector.network</a>
+ &#8226;   <a href="#mysql.connector.utils">mysql.connector.utils</a>
  &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#pathlib">pathlib</a>
  &#8226;   <a href="#pkgutil">pkgutil</a>
@@ -16425,8 +16710,6 @@ imported by:
  &#8226;   <a href="#requests.utils">requests.utils</a>
  &#8226;   <a href="#runpy">runpy</a>
  &#8226;   <a href="#shutil">shutil</a>
- &#8226;   <a href="#sqlite3">sqlite3</a>
- &#8226;   <a href="#sqlite3.dbapi2">sqlite3.dbapi2</a>
  &#8226;   <a href="#sre_compile">sre_compile</a>
  &#8226;   <a href="#sre_constants">sre_constants</a>
  &#8226;   <a href="#sre_parse">sre_parse</a>
@@ -16496,8 +16779,7 @@ imported by:
  &#8226;   <a href="#multiprocessing.queues">multiprocessing.queues</a>
  &#8226;   <a href="#multiprocessing.sharedctypes">multiprocessing.sharedctypes</a>
  &#8226;   <a href="#multiprocessing.util">multiprocessing.util</a>
- &#8226;   <a href="#mysql.connector.cursor">mysql.connector.cursor</a>
- &#8226;   <a href="#mysql.connector.cursor_cext">mysql.connector.cursor_cext</a>
+ &#8226;   <a href="#mysql.connector.abstracts">mysql.connector.abstracts</a>
  &#8226;   <a href="#tempfile">tempfile</a>
  &#8226;   <a href="#unittest.signals">unittest.signals</a>
  &#8226;   <a href="#urllib3.connectionpool">urllib3.connectionpool</a>
@@ -16779,18 +17061,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#multiprocessing.connection">multiprocessing.connection</a>
- &#8226;   <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="xmlrpclib"></a>
-  <a target="code" href="" type="text/plain"><tt>xmlrpclib</tt></a>
-<span class="moduletype">MissingModule</span>  <div class="import">
-imported by:
-    <a href="#mysql.connector.fabric.connection">mysql.connector.fabric.connection</a>
 
   </div>
 
