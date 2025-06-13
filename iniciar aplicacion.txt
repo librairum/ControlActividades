@@ -1,3 +1,6 @@
+Si en caso, se desea ejecutar en Visual Studio primero verificar la hora programada, en el archivo captura\hora_programada\hora_cap.txt (cambiar la hora y el minuto que se requiera para tomar la captura 
+NOTA: Debe ser en el formato HH:MM)
+
 Para iniciar la aplicación, se debe entrar a la carpeta dist y dentro de la carpeta interfaz_visor se encontrará el ejecutable: interfaz_visor.exe
 
 NOTA: si se quiere modificar el código para generar el ejecutable con los cambios se debe abrir una terminal en la ruta: ControlActividades\
