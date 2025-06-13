@@ -5,8 +5,13 @@ import tkinter as tk
 from tkinter import messagebox
 import psutil, mss
 
+# Agregar la raíz del proyecto al sys.path
+root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if root_path not in sys.path:
+    sys.path.insert(0, root_path)
+
+# IMPORTS ABSOLUTOS CORRECTOS
 from Interfaz.conf_avanz import mostrar_configuracion_avanzada
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from activity import main2
 
 # === FUNCIONES AUXILIARES ===
@@ -18,8 +23,10 @@ def leer_horas_programadas():
     """
     horas = []
     try:
-        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-        ruta_txt = os.path.join(base_dir, "captura", "hora_programada", "hora_cap.txt")
+        #base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        #base_dir = get_base_dir()
+        #ruta_txt = os.path.join(base_dir, "captura", "hora_programada", "hora_cap.txt")
+        ruta_txt = obtener_ruta_relativa("captura/hora_programada/hora_cap.txt")
 
         with open(ruta_txt, "r", encoding="utf-8") as archivo:
             for linea in archivo:
@@ -36,6 +43,23 @@ def leer_horas_programadas():
     except Exception as e:
         messagebox.showerror("Error", f"Error al leer horas programadas: {e}")
     return horas
+
+def obtener_ruta_relativa(ruta_archivo):
+    """Retorna la ruta absoluta correcta compatible con PyInstaller."""
+    if hasattr(sys, '_MEIPASS'):
+        # Cuando está empaquetado
+        base_path = sys._MEIPASS
+    else:
+        # Cuando está en modo desarrollo
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, ruta_archivo)
+
+def get_base_dir():
+    if getattr(sys, 'frozen', False):
+        return os.path.dirname(sys.executable)  # Directorio donde está el .exe
+    else:
+        return os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 def agregar_a_inicio():
     clave = winreg.OpenKey(winreg.HKEY_CURRENT_USER,
@@ -78,10 +102,12 @@ def verificar_activitywatch():
             sys.exit()
 
 def obtener_paths():
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    #base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    base_dir = get_base_dir()
     caps_dir = os.path.join(base_dir, "captura", "Screen_Caps")
     bin_dir = os.path.join(base_dir, "captura", "Img_to_Binary")
-    db_path = os.path.join(base_dir, "captura", "imagenes.db")
+    #db_path = os.path.join(base_dir, "captura", "imagenes.db")
+    db_path = obtener_ruta_relativa("captura/imagenes.db")
     os.makedirs(caps_dir, exist_ok=True)
     os.makedirs(bin_dir, exist_ok=True)
     return caps_dir, bin_dir, db_path

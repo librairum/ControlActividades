@@ -1,7 +1,8 @@
 import os
+import sys
 import json
 import threading
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from activity.conexion_mysql import insertar_actividades
 from activity.aw_utils import (
     cargar_reglas_desde_json,
@@ -11,7 +12,8 @@ from activity.aw_utils import (
     obtener_eventos,
     clasificar_evento,
     local_a_utc,
-    utc_a_local
+    utc_a_local,
+    LOCAL_TIMEZONE
 )
 
 CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.json")
@@ -44,11 +46,11 @@ def exportar_actividad_periodica():
 
     def ciclo():
         INTERVALO_MIN = leer_intervalo_config()
-        ahora = datetime.now()
-        inicio_local = ahora - timedelta(minutes=INTERVALO_MIN)
-        fin_local = ahora
-        inicio_utc = local_a_utc(inicio_local)
-        fin_utc = local_a_utc(fin_local)
+        ahora_local_naive = datetime.now()
+        fin_local_naive = ahora_local_naive
+        inicio_local_naive = ahora_local_naive - timedelta(minutes=INTERVALO_MIN)
+        inicio_utc = local_a_utc(inicio_local_naive)
+        fin_utc = local_a_utc(fin_local_naive)
         url = construir_url(bucket, inicio_utc, fin_utc)
         eventos = obtener_eventos(url)
 
@@ -79,9 +81,9 @@ def exportar_actividad_periodica():
         subidas = ["Primera", "Segunda", "Tercera", "Cuarta", "Quinta"]
         n = exportar_actividad_periodica.ciclo_count
         if n <= len(subidas):
-            print(f"{subidas[n-1]} subida al MySQL a las {datetime.now().strftime('%H:%M:%S')}")
+            print(f"{subidas[n-1]} subida al MySQL a las {datetime.now(LOCAL_TIMEZONE).strftime('%H:%M:%S')}")
         else:
-            print(f"Subida #{n} al MySQL a las {datetime.now().strftime('%H:%M:%S')}")
+            print(f"Subida #{n} al MySQL a las {datetime.now(LOCAL_TIMEZONE).strftime('%H:%M:%S')}")
 
         exportar_actividad_periodica.ciclo_count += 1
 

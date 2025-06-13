@@ -1,13 +1,12 @@
 import mysql.connector
 from mysql.connector import Error
 import os
-from activity.aw_utils import load_db_config # <--- Esta línea es crucial
+from activity.aw_utils import load_db_config
 
-def insertar_actividades(lista_actividades, config_file_path): # <--- Asegúrate de que el parámetro 'config_file_path' esté aquí
+def insertar_actividades(lista_actividades, config_file_path):
     conn = None
     try:
-        db_config = load_db_config(config_file_path) # <--- Aquí se llama a la función
-
+        db_config = load_db_config(config_file_path)
         if not db_config:
             print("Error: No se pudo cargar la configuración de la base de datos.")
             return False

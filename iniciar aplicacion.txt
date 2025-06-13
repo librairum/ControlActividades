@@ -1,4 +1,4 @@
-Para iniciar la aplicación, se debe entrar a la carpeta dist y ejecutar el archivo interfaz_visor.exe
+Para iniciar la aplicación, se debe entrar a la carpeta dist y dentro de la carpeta interfaz_visor se encontrará el ejecutable: interfaz_visor.exe
 
 NOTA: si se quiere modificar el código para generar el ejecutable con los cambios se debe abrir una terminal en la ruta: ControlActividades\
 y ejecutar el comando:
