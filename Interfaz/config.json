@@ -6,5 +6,6 @@
     "password": "AVNS_85euRnRiqGGv-rmyWsj",
     "dbname": "gmadministracion"
   },
-  "intervalo_min": 10
+  "intervalo_min": 10,
+  "dni": ""
 }
