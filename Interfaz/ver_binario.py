@@ -15,7 +15,7 @@ conexion = mysql.connector.connect(
 cursor = conexion.cursor()
 
 # Seleccionar una imagen por id
-cursor.execute("SELECT imagen_en_bytes FROM asistencia_imagenes WHERE id_foto = 2")  # Cambia el id_foto si es necesario
+cursor.execute("SELECT imagen_en_bytes FROM asistencia_imagenes WHERE id_foto = 19")  # Cambia el id_foto si es necesario
 imagen_bytes = cursor.fetchone()[0]
 
 # Mostrar la imagen

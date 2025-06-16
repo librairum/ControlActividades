@@ -204,7 +204,7 @@ def crear_interfaz():
         caps_dir, bin_dir= obtener_paths()
 
         def tarea():
-            capturas = []
+            cont_capturas = 0
             for hora in horas:
                 esperar_hora(hora)
                 path, timestamp = tomar_captura_y_guardar(caps_dir)
@@ -216,27 +216,26 @@ def crear_interfaz():
                 hora_actual = datetime.strptime(hora_raw, "%H%M%S").strftime("%H:%M:%S")
                 nombre_pc = socket.gethostname()
                 imagen_bytes = base64.b64decode(b64)
-                capturas.append((dni, nombre_pc, fecha, hora_actual, imagen_bytes))
 
-            # Guardar los datos en MySQL
-            conn = conectar_mysql()
-            if conn:
-                messagebox.showinfo("Conexion", "conexion exitosa con la BD.")
-                try:
-                    cursor = conn.cursor()
-                    sql = "INSERT INTO asistencia_imagenes (dni, nombre_equipo, fecha, hora, imagen_en_bytes) VALUES (%s, %s, %s, %s, %s)"
-                    cursor.executemany(sql, capturas)
-                    conn.commit()
-                    cursor.close()
-                    conn.close()
-                    messagebox.showinfo("Captura", "Capturas guardadas correctamente.")
-                except Exception as e:
-                    with open('error_log.txt', 'a') as log_file:
-                        log_file.write(f'Error: {str(e)}\n')
-                        log_file.write(traceback.format_exc())
-                    messagebox.showerror("Error", f"Error al guardar en MySQL: {e}")
-            else:
-                messagebox.showerror("Error", "No se pudo conectar a la base de datos MySQL.")
+                # Insertar inmediatamente después de cada captura
+                conn = conectar_mysql()
+                if conn:
+                    try:
+                        cursor = conn.cursor()
+                        sql = "INSERT INTO asistencia_imagenes (dni, nombre_equipo, fecha, hora, imagen_en_bytes) VALUES (%s, %s, %s, %s, %s)"
+                        cursor.execute(sql, (dni, nombre_pc, fecha, hora_actual, imagen_bytes))
+                        conn.commit()
+                        cursor.close()
+                        conn.close()
+                        cont_capturas+= 1
+                        messagebox.showinfo("Captura", "Captura "+str(cont_capturas)+" realizada correctamente.")
+                    except Exception as e:
+                        with open('error_log.txt', 'a') as log_file:
+                            log_file.write(f'Error: {str(e)}\n')
+                            log_file.write(traceback.format_exc())
+                        messagebox.showerror("Error", f"Error al guardar en MySQL: {e}")
+                else:
+                    messagebox.showerror("Error", "No se pudo conectar a la base de datos MySQL.")
 
             #with sqlite3.connect(db_path) as conn:
                 #conn.executemany(
