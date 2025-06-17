@@ -1,3 +1,10 @@
 {
-  "intervalo_min": 2
+  "database": {
+    "host": "mysql-a21bb78-sistemasnet26-321c.k.aivencloud.com",
+    "port": 10658,
+    "user": "avnadmin",
+    "password": "AVNS_85euRnRiqGGv-rmyWsj",
+    "dbname": "gmadministracion"
+  },
+  "intervalo_min": 10
 }

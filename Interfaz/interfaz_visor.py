@@ -142,6 +142,40 @@ def iniciar_capturas(dni, horas, caps_dir, bin_dir):
 
     threading.Thread(target=tarea).start()
 
+def captura_dinamica(dni, caps_dir, bin_dir):
+    def tarea_inicial():
+        print("[Captura inicial] Esperando 5 minutos...")
+        time.sleep(300)  # 5 minutos = 300 segundos
+        path, timestamp = tomar_captura_y_guardar(caps_dir)
+        b64 = convertir_a_base64(path)
+        guardar_en_txt(bin_dir, b64, timestamp)
+
+        fecha_raw, hora_raw = timestamp.split("_")
+        fecha = datetime.strptime(fecha_raw, "%Y%m%d").strftime("%d/%m/%y")
+        hora_actual = datetime.strptime(hora_raw, "%H%M%S").strftime("%H:%M:%S")
+        nombre_pc = socket.gethostname()
+        imagen_bytes = base64.b64decode(b64)
+
+        conn = conectar_mysql()
+        if conn:
+            try:
+                cursor = conn.cursor()
+                sql = "INSERT INTO asistencia_imagenes (dni, nombre_equipo, fecha, hora, imagen_en_bytes) VALUES (%s, %s, %s, %s, %s)"
+                cursor.execute(sql, (dni, nombre_pc, fecha, hora_actual, imagen_bytes))
+                conn.commit()
+                cursor.close()
+                conn.close()
+                messagebox.showinfo("Captura inicial", "Captura inicial realizada correctamente a los 5 minutos.")
+            except Exception as e:
+                with open('error_log.txt', 'a') as log_file:
+                    log_file.write(f'Error en captura inicial: {str(e)}\n')
+                    log_file.write(traceback.format_exc())
+                messagebox.showerror("Error", f"Error al guardar la captura inicial en MySQL: {e}")
+        else:
+            messagebox.showerror("Error", "No se pudo conectar a la base de datos para la captura inicial.")
+
+    threading.Thread(target=tarea_inicial).start()
+
 # =============== INTERFAZ GRÁFICA ===============
 def crear_interfaz():
     def confirmar_salida():
@@ -193,6 +227,7 @@ def crear_interfaz():
         horas = leer_horas_programadas()
         caps_dir, bin_dir = obtener_paths()
         iniciar_capturas(dni, horas, caps_dir, bin_dir)
+        captura_dinamica(dni, caps_dir, bin_dir)
 
     def abrir_filtro_si_hay_dni():
         if not dni_guardado:

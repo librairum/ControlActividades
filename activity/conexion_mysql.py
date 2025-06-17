@@ -1,6 +1,5 @@
 import mysql.connector
 from mysql.connector import Error
-import os
 from activity.aw_utils import load_db_config
 
 def insertar_actividades(lista_actividades, config_file_path):
