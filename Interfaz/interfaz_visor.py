@@ -45,7 +45,7 @@ def leer_horas_programadas():
                     if len(hora) == 5 and hora[2] == ":": horas.append(hora)
     except FileNotFoundError:
         messagebox.showerror("Error", "No se encontró el archivo hora_cap.txt.")
-    except Exception as e:
+    except OSError as e:
         messagebox.showerror("Error", f"Error al leer horas programadas: {e}")
     return horas
 
