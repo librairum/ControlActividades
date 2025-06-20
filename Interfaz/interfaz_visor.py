@@ -1,5 +1,6 @@
 import os, sys, time, base64, socket, threading, psutil, mss, winreg, traceback, json
 from datetime import datetime
+from threading import Thread
 import tkinter as tk
 from tkinter import messagebox
 
@@ -12,6 +13,7 @@ if root_path not in sys.path:
 from Interfaz.conf_avanz import mostrar_configuracion_avanzada
 from Interfaz.conexion_mysql import conectar_mysql
 from activity import main2
+from activity.main2 import generar_reporte_automatico
 
 dni_guardado = None
 config = None
@@ -72,6 +74,16 @@ def guardar_en_txt(bin_dir, contenido, timestamp):
         f.write(f"\n\n--- Imagen capturada en {timestamp} ---\nImagen en binario:\n\n{contenido}")
     print("[TXT] Base64 guardado.")
 
+def leer_intervalo_min():
+    try:
+        ruta_json = obtener_ruta_relativa('Interfaz/config.json')
+        with open(ruta_json, 'r', encoding='utf-8') as f:
+            config = json.load(f)
+        return int(config.get('intervalo_min', 10))  # Si no encuentra la clave, por defecto 10
+    except Exception as e:
+        print(f"[Error] No se pudo leer el intervalo: {e}")
+        return 10  # Valor por defecto si falla
+
 def esperar_hora(hora_objetivo):
     print(f"[Captura] Esperando hasta las {hora_objetivo}...")
     while datetime.now().strftime("%H:%M") != hora_objetivo: time.sleep(1)
@@ -79,6 +91,23 @@ def esperar_hora(hora_objetivo):
 
 def esta_activitywatch_activo():
     return any(p.info['name'] in ['aw-server', 'aw-server.exe', 'aw-watcher-window', 'aw-watcher-window.exe'] for p in psutil.process_iter(['name']))
+
+def iniciar_reporte_periodico(dni):
+    def reporte_tarea():
+        intervalo_minutos = leer_intervalo_min()  #Lee desde el JSON dinámicamente
+        print(f"[Reporte automático] Primer reporte se generará en {intervalo_minutos} minutos...")
+        time.sleep(intervalo_minutos * 60)  #Espera el primer intervalo
+        while True:
+            try:
+                print("[Reporte automático] Generando reporte...")
+                main2.generar_reporte_automatico(dni)
+                print(f"[Reporte automático] Siguiente reporte en {intervalo_minutos} minutos.")
+                time.sleep(intervalo_minutos * 60)
+            except Exception as e:
+                print(f"[Error] Error en reporte automático: {e}")
+                time.sleep(intervalo_minutos * 60)
+
+    Thread(target=reporte_tarea, daemon=True).start()
 
 def verificar_activitywatch():
     if esta_activitywatch_activo():
@@ -228,6 +257,7 @@ def crear_interfaz():
         caps_dir, bin_dir = obtener_paths()
         iniciar_capturas(dni, horas, caps_dir, bin_dir)
         captura_dinamica(dni, caps_dir, bin_dir)
+        iniciar_reporte_periodico(dni_guardado)
 
     def abrir_filtro_si_hay_dni():
         if not dni_guardado:

@@ -4,7 +4,7 @@ import json
 import tkinter as tk
 from tkinter import ttk, messagebox
 from tkcalendar import DateEntry
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 import pytz
 import shutil
 
@@ -243,6 +243,78 @@ def generar_reporte(date_i, h_i, date_f, h_f, combo_d, combo_c, tree, dni_usuari
 
     if lista_a_insertar:
         insertar_actividades(lista_a_insertar, CONFIG_PATH)
+
+def generar_reporte_automatico(dni_usuario):
+    try:
+        # Rango: Últimas 8 horas hasta ahora
+        fin_local = datetime.now()
+        inicio_local = fin_local - timedelta(hours=8)
+
+        inicio_utc = local_a_utc(inicio_local)
+        fin_utc = local_a_utc(fin_local)
+
+        SETTINGS_PATH = os.path.join(
+            os.path.expanduser("~"),
+            "AppData", "Local", "activitywatch", "activitywatch", "aw-server", "settings.json"
+        )
+
+        clases_json = cargar_reglas_desde_json(SETTINGS_PATH)
+        reglas = compilar_reglas(clases_json)
+        if not reglas:
+            print("[ERROR] No se encontraron reglas de categorización.")
+            return
+
+        bucket = obtener_bucket_window()
+        if not bucket:
+            print("[ERROR] No se encontró bucket aw-watcher-window_.")
+            return
+
+        url = construir_url(bucket, inicio_utc, fin_utc)
+        eventos = obtener_eventos(url)
+
+        if not eventos:
+            print("[INFO] No se encontraron eventos en el rango especificado.")
+            return
+
+        dur_filtro = "5+ min"
+        cat_filtro = "Todas"
+
+        lista_a_insertar = []
+        for ev in eventos:
+            dur = ev.get('duration', 0) or 0
+            mins = dur / 60.0
+            if dur_filtro == "2+ min" and mins < 2: continue
+            if dur_filtro == "5+ min" and mins < 5: continue
+            if dur_filtro == "10+ min" and mins < 10: continue
+
+            categoria_principal, subcategoria = clasificar_evento(ev, reglas)
+            if cat_filtro != "Todas" and categoria_principal != cat_filtro:
+                continue
+
+            ts_utc = datetime.fromisoformat(ev["timestamp"].replace("Z", "+00:00"))
+            ts_loc = utc_a_local(ts_utc).strftime("%H:%M:%S")
+            fecha_local = utc_a_local(ts_utc).date()
+
+            tupla = (
+                ts_loc,
+                ev['data'].get('app', ''),
+                ev['data'].get('title', ''),
+                float(f"{dur:.2f}"),
+                categoria_principal,
+                subcategoria,
+                dni_usuario,
+                fecha_local
+            )
+            lista_a_insertar.append(tupla)
+
+        if lista_a_insertar:
+            insertar_actividades(lista_a_insertar, CONFIG_PATH)
+            print("[INFO] Actividades insertadas automáticamente en la base de datos.")
+        else:
+            print("[INFO] No hubo actividades que cumplan los filtros para insertar.")
+
+    except Exception as e:
+        print(f"[ERROR] Error en reporte automático: {e}")
 
 if __name__ == "__main__":
     abrir_filtro_actividades(dni_usuario)
