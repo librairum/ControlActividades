@@ -1,0 +1,31 @@
+[INICIO] Arranc� hilo del reporte con intervalo: 5 min
+[REPORTE] Generando a las 2025-06-25 15:14:30.966873
+[DEBUG] Entrando a insertar_actividades
+[DEBUG] Total actividades a insertar: 4
+[DEBUG] Conectado a DB: gmadministracion@mysql-a21bb78-sistemasnet26-321c.k.aivencloud.com:10658
+[INFO] Insertadas 4 nuevas actividades.
+
+[INICIO] Generando reporte a las 2025-06-25 15:14:30.969410
+[DEBUG] SETTINGS_PATH: C:\Users\Usuario\AppData\Local\activitywatch\activitywatch\aw-server\settings.json
+[DEBUG] Se insertarán 4 actividades.
+[INFO] Actividades insertadas correctamente en la base de datos.
+[REPORTE] Generando a las 2025-06-25 15:19:38.308740
+[DEBUG] Entrando a insertar_actividades
+[DEBUG] Total actividades a insertar: 4
+[DEBUG] Conectado a DB: gmadministracion@mysql-a21bb78-sistemasnet26-321c.k.aivencloud.com:10658
+[INFO] Insertadas 0 nuevas actividades.
+
+[INICIO] Generando reporte a las 2025-06-25 15:19:38.311294
+[DEBUG] SETTINGS_PATH: C:\Users\Usuario\AppData\Local\activitywatch\activitywatch\aw-server\settings.json
+[DEBUG] Se insertarán 4 actividades.
+[INFO] Actividades insertadas correctamente en la base de datos.
+[REPORTE] Generando a las 2025-06-25 15:24:46.181363
+[DEBUG] Entrando a insertar_actividades
+[DEBUG] Total actividades a insertar: 5
+[DEBUG] Conectado a DB: gmadministracion@mysql-a21bb78-sistemasnet26-321c.k.aivencloud.com:10658
+[INFO] Insertadas 1 nuevas actividades.
+
+[INICIO] Generando reporte a las 2025-06-25 15:24:46.182377
+[DEBUG] SETTINGS_PATH: C:\Users\Usuario\AppData\Local\activitywatch\activitywatch\aw-server\settings.json
+[DEBUG] Se insertarán 5 actividades.
+[INFO] Actividades insertadas correctamente en la base de datos.

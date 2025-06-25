@@ -27,13 +27,12 @@ from activity.aw_utils import (
 from activity.conexion_mysql import insertar_actividades
 
 dni_usuario = '77475987'
-"""def get_base_dir():
+def get_base_dir():
     if getattr(sys, 'frozen', False):
         return sys._MEIPASS  # Al ejecutarse como .exe
     return os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-CONFIG_PATH = os.path.join(get_base_dir(), "Interfaz", "config.json")"""
-CONFIG_PATH = os.path.join(os.path.dirname(__file__), "config.json")
+CONFIG_PATH = os.path.join(get_base_dir(), "Interfaz", "config.json")
 
 def guardar_intervalo_config(intervalo):
     config_data = {}

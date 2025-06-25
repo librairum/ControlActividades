@@ -29,9 +29,11 @@ def insertar_actividades(lista_actividades, config_file_path):
             log.write(f"[DEBUG] Conectado a DB: {db_config.get('dbname')}@{db_config.get('host')}:{db_config.get('port')}\n")
 
         sql = """
-            INSERT IGNORE INTO actividad
+            INSERT INTO actividad
             (hora, app, titulo, duracion, categoria, subcategoria, dni, fecha)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE
+            duracion = VALUES(duracion)
         """
         cursor.executemany(sql, lista_actividades)
         conn.commit()

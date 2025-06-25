@@ -14,6 +14,11 @@ from Interfaz.conf_avanz import mostrar_configuracion_avanzada
 from Interfaz.conexion_mysql import conectar_mysql
 from activity import main2
 from activity.main2 import generar_reporte_automatico
+if getattr(sys, 'frozen', False):
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONFIG_PATH = os.path.join(BASE_DIR, 'Interfaz', 'config.json')
 
 dni_guardado = None
 config = None
@@ -94,18 +99,24 @@ def esta_activitywatch_activo():
 
 def iniciar_reporte_periodico(dni):
     def reporte_tarea():
-        intervalo_minutos = leer_intervalo_min()  #Lee desde el JSON dinámicamente
-        print(f"[Reporte automático] Primer reporte se generará en {intervalo_minutos} minutos...")
-        time.sleep(intervalo_minutos * 60)  #Espera el primer intervalo
-        while True:
-            try:
-                print("[Reporte automático] Generando reporte...")
-                main2.generar_reporte_automatico(dni)
-                print(f"[Reporte automático] Siguiente reporte en {intervalo_minutos} minutos.")
+        try:
+            intervalo_minutos = leer_intervalo_min()
+            with open("reporte_log.txt", "a") as log:
+                log.write(f"[INICIO] Arrancó hilo del reporte con intervalo: {intervalo_minutos} min\n")
+            time.sleep(intervalo_minutos * 60)
+            while True:
+                try:
+                    with open("reporte_log.txt", "a") as log:
+                        log.write(f"[REPORTE] Generando a las {datetime.now()}\n")
+                    generar_reporte_automatico(dni)
+                except Exception as e:
+                    with open("reporte_log.txt", "a") as log:
+                        log.write(f"[ERROR] {e}\n")
+                        log.write(traceback.format_exc())  # Agrega más detalle del error
                 time.sleep(intervalo_minutos * 60)
-            except Exception as e:
-                print(f"[Error] Error en reporte automático: {e}")
-                time.sleep(intervalo_minutos * 60)
+        except Exception as e:
+            with open("reporte_log.txt", "a") as log:
+                log.write(f"[FATAL] No arrancó hilo: {e}\n")
 
     Thread(target=reporte_tarea, daemon=True).start()
 

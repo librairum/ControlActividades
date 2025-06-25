@@ -10,9 +10,13 @@ a = Analysis(
         ('captura\\hora_programada\\hora_cap.txt', 'captura\\hora_programada'),
         ('captura\\imagenes.db', 'captura'),
         ('Interfaz/config.json', 'Interfaz'),
-        ('Interfaz/conexion_mysql.py', 'Interfaz')
+        ('Interfaz/conexion_mysql.py', 'Interfaz'),
+        ('activity/main2.py', 'activity'),
+        ('activity/exportador_simple.py', 'activity'),
+        ('activity/conexion_mysql.py', 'activity'),
+        ('activity/aw_utils.py', 'activity')
     ],
-    hiddenimports=['mysql', 'mysql.connector'],
+    hiddenimports=['mysql', 'mysql.connector', 'activity.main2'],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
